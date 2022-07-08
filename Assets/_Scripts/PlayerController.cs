@@ -6,10 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     Vector3 targetPosition;
     float stoppingDistance = .1f;
+    Animator unitAnim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        unitAnim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -18,13 +19,18 @@ public class PlayerController : MonoBehaviour
         if(Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
             Vector3 desiredDirection = (targetPosition - transform.position).normalized;
-            float moveSpeed = 4f;
+            float moveSpeed = 10f;
             transform.position += desiredDirection * moveSpeed * Time.deltaTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetMouseButtonDown(0))
         {
-            Move(new Vector3(4, 0, 4));
+            Move(MousePosition.GetPosition());
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            unitAnim.SetTrigger("Shoot");
         }
     }
 
