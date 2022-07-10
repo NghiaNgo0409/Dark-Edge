@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Vector3 targetPosition;
     float stoppingDistance = .1f;
+    float rotateSpeed = 10f;
     Animator unitAnim;
     // Start is called before the first frame update
     void Start()
@@ -18,9 +19,15 @@ public class PlayerController : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
+            unitAnim.SetBool("isRunning", true);
             Vector3 desiredDirection = (targetPosition - transform.position).normalized;
             float moveSpeed = 10f;
             transform.position += desiredDirection * moveSpeed * Time.deltaTime;
+            transform.forward = Vector3.Lerp(transform.forward, desiredDirection, rotateSpeed * Time.deltaTime);
+        }
+        else
+        {
+            unitAnim.SetBool("isRunning", false);
         }
 
         if(Input.GetMouseButtonDown(0))
