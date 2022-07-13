@@ -35,4 +35,15 @@ public class GridSystem
             Mathf.RoundToInt(worldPosition.z) / cellSize
         ));
     }
+
+    public void CreateGridObject(Transform gridObject)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < height; z++)
+            {
+                GameObject.Instantiate(gridObject, GetWorldPosition(x, z), Quaternion.identity);
+            }
+        }
+    }
 }
