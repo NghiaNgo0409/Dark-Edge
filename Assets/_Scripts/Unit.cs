@@ -12,6 +12,7 @@ public class Unit : MonoBehaviour
     void Start()
     {
         unitAnim = GetComponentInChildren<Animator>();
+        targetPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -30,18 +31,13 @@ public class Unit : MonoBehaviour
             unitAnim.SetBool("isRunning", false);
         }
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            Move(MousePosition.GetPosition());
-        }
-
         if(Input.GetKeyDown(KeyCode.Space))
         {
             unitAnim.SetTrigger("Shoot");
         }
     }
 
-    void Move(Vector3 targetPosition)
+    public void Move(Vector3 targetPosition)
     {
         this.targetPosition = targetPosition;
     }
