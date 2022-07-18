@@ -5,8 +5,22 @@ using UnityEngine;
 
 public class UnitActionSystem : MonoBehaviour
 {
+    public static UnitActionSystem Instance {get; private set;}
+    public event EventHandler OnSelectedUnitChange;
     [SerializeField] Unit selectingUnit;
     [SerializeField] LayerMask unitLayerMask;
+
+    void Awake() 
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +45,22 @@ public class UnitActionSystem : MonoBehaviour
         {
             if(hitRay.collider.TryGetComponent<Unit>(out Unit unit))
             {
-                selectingUnit = unit;
+                SetSelectingUnit(unit);
                 return true;
             }
         }
         return false;
+    }
+
+    public void SetSelectingUnit(Unit unit)
+    {
+        selectingUnit = unit;
+        
+        OnSelectedUnitChange?.Invoke(this, EventArgs.Empty); //Fire off the event. In this case is a selecting unit event
+    }
+
+    public Unit GetSelectingUnit()
+    {
+        return selectingUnit;
     }
 }
