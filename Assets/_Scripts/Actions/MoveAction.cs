@@ -1,27 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveAction : MonoBehaviour
+public class MoveAction : BaseAction
 {
     Vector3 targetPosition;
     float stoppingDistance = .1f;
     float rotateSpeed = 10f;
     
     Animator unitAnim;
-    Unit unit;
     [SerializeField] int maxMoveDistance;
+
+    public Action onMoveCompleted;
+    protected override void Awake() 
+    {
+        base.Awake();
+        unitAnim = GetComponentInChildren<Animator>();
+        targetPosition = transform.position;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        unit = GetComponent<Unit>();
-        unitAnim = GetComponentInChildren<Animator>();
-        targetPosition = transform.position;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!isActive) return;
+
         if(Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
             unitAnim.SetBool("isRunning", true);
@@ -33,6 +41,8 @@ public class MoveAction : MonoBehaviour
         else
         {
             unitAnim.SetBool("isRunning", false);
+            isActive = false;
+            onMoveCompleted();
         }
     }
 
@@ -75,8 +85,10 @@ public class MoveAction : MonoBehaviour
         return validGridPositionList;
     }
 
-    public void Move(GridPosition gridPosition)
+    public void Move(GridPosition gridPosition, Action onMoveCompleted)
     {
+        this.onMoveCompleted = onMoveCompleted;
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        isActive = true;
     }
 }

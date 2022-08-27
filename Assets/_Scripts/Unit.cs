@@ -6,9 +6,11 @@ public class Unit : MonoBehaviour
 {
     GridPosition gridPosition;
     MoveAction moveAction;
+    SpinAction spinAction;
     void Awake()
     {
         moveAction = GetComponent<MoveAction>();
+        spinAction = GetComponent<SpinAction>();
     }
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,11 @@ public class Unit : MonoBehaviour
     public MoveAction GetMoveAction()
     {
         return moveAction;
+    }
+
+    public SpinAction GetSpinAction()
+    {
+        return spinAction;
     }
 
     public GridPosition GetGridPosition()
