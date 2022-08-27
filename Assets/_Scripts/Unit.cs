@@ -4,41 +4,38 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    Vector3 targetPosition;
-    float stoppingDistance = .1f;
-    float rotateSpeed = 10f;
-    Animator unitAnim;
+    GridPosition gridPosition;
+    MoveAction moveAction;
+    void Awake()
+    {
+        moveAction = GetComponent<MoveAction>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        unitAnim = GetComponentInChildren<Animator>();
-        targetPosition = transform.position;
+        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
+        GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        if(newGridPosition != gridPosition)
         {
-            unitAnim.SetBool("isRunning", true);
-            Vector3 desiredDirection = (targetPosition - transform.position).normalized;
-            float moveSpeed = 10f;
-            transform.position += desiredDirection * moveSpeed * Time.deltaTime;
-            transform.forward = Vector3.Lerp(transform.forward, desiredDirection, rotateSpeed * Time.deltaTime);
-        }
-        else
-        {
-            unitAnim.SetBool("isRunning", false);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            unitAnim.SetTrigger("Shoot");
+            // Unit changed Grid Position
+            LevelGrid.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
+            gridPosition = newGridPosition;
         }
     }
 
-    public void Move(Vector3 targetPosition)
+    public MoveAction GetMoveAction()
     {
-        this.targetPosition = targetPosition;
+        return moveAction;
+    }
+
+    public GridPosition GetGridPosition()
+    {
+        return gridPosition;
     }
 }
