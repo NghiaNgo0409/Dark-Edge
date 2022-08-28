@@ -7,10 +7,12 @@ public class Unit : MonoBehaviour
     GridPosition gridPosition;
     MoveAction moveAction;
     SpinAction spinAction;
+    BaseAction[] baseActionArray;
     void Awake()
     {
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
+        baseActionArray = GetComponents<BaseAction>();
     }
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,11 @@ public class Unit : MonoBehaviour
     public SpinAction GetSpinAction()
     {
         return spinAction;
+    }
+
+    public BaseAction[] GetBaseActionArray()
+    {
+        return baseActionArray;
     }
 
     public GridPosition GetGridPosition()
