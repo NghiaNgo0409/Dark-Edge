@@ -46,13 +46,7 @@ public class MoveAction : BaseAction
         }
     }
 
-    public bool IsValidActionGridPosition(GridPosition gridPosition)
-    {
-        List<GridPosition> validGridPositionList = GetValidActionGridPosition();
-        return validGridPositionList.Contains(gridPosition);
-    }
-
-    public List<GridPosition> GetValidActionGridPosition()
+    public override List<GridPosition> GetValidActionGridPosition()
     {
         List<GridPosition> validGridPositionList = new List<GridPosition>();
         GridPosition unitGridPosition = unit.GetGridPosition();
@@ -85,7 +79,7 @@ public class MoveAction : BaseAction
         return validGridPositionList;
     }
 
-    public void Move(GridPosition gridPosition, Action onMoveCompleted)
+    public override void TakeAction(GridPosition gridPosition, Action onMoveCompleted)
     {
         this.onMoveCompleted = onMoveCompleted;
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
