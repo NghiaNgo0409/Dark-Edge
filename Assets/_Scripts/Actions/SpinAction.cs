@@ -31,6 +31,7 @@ public class SpinAction : BaseAction
         if(totalSpinAmount > 360f)
         {
             isActive = false;
+            totalSpinAmount = 0;
             onSpinCompleted();
         }
     }
