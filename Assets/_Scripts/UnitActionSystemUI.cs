@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UnitActionSystemUI : MonoBehaviour
 {
     [SerializeField] Transform actionSystemUIPrefab;
     [SerializeField] Transform actionSystemUIContainer;
+    [SerializeField] TextMeshProUGUI actionPointsText; 
     List<ActionButtonUI> actionButtonUIList;
     void Awake()
     {
@@ -18,10 +20,11 @@ public class UnitActionSystemUI : MonoBehaviour
     {
         UnitActionSystem.Instance.OnSelectedUnitChange += OnEventUnitChanged_UpdateActionUI;
         UnitActionSystem.Instance.OnSelectedActionChange += OnEventActionChanged_UpdateActionUI;
+        UnitActionSystem.Instance.OnActionStarted += OnActionStarted_UpdateActionUI;
         CreateActionUIButtons();
         UpdateSelectedVisual();
+        UpdateActionPoints();
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -58,11 +61,23 @@ public class UnitActionSystemUI : MonoBehaviour
         UpdateSelectedVisual();
     }
 
+    void OnActionStarted_UpdateActionUI(object sender, EventArgs e)
+    {
+        UpdateActionPoints();
+    }
+
+
     void UpdateSelectedVisual()
     {
         foreach(ActionButtonUI actionButtonUI in actionButtonUIList)
         {
             actionButtonUI.UpdateSelectedVisual();
         }
+    }
+
+    void UpdateActionPoints()
+    {
+        Unit selectingUnit = UnitActionSystem.Instance.GetSelectingUnit();
+        actionPointsText.text = "Action Points: " + selectingUnit.GetActionPoints();
     }
 }

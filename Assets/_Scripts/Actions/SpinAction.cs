@@ -56,4 +56,9 @@ public class SpinAction : BaseAction
     {
         return "Spin";
     }
+
+    public override int GetActionPoints()
+    {
+        return 2;
+    }
 }

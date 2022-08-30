@@ -9,6 +9,7 @@ public class UnitActionSystem : MonoBehaviour
     public static UnitActionSystem Instance {get; private set;}
     public event EventHandler OnSelectedUnitChange;
     public event EventHandler OnSelectedActionChange;
+    public event EventHandler OnActionStarted;
     public event EventHandler<bool> OnBusyChange;
     [SerializeField] Unit selectingUnit;
     [SerializeField] LayerMask unitLayerMask;
@@ -50,8 +51,13 @@ public class UnitActionSystem : MonoBehaviour
 
             if(selectedAction.IsValidActionGridPosition(mouseGridPosition))
             {
-                SetBusy();
-                selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+                if(selectingUnit.TrySpendActionPointsToTakeAction(selectedAction))
+                {
+                    SetBusy();
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+
+                    OnActionStarted?.Invoke(this, EventArgs.Empty);
+                }
             }
         }
     }
@@ -83,6 +89,7 @@ public class UnitActionSystem : MonoBehaviour
         SetSelectingAction(unit.GetMoveAction());
         
         OnSelectedUnitChange?.Invoke(this, EventArgs.Empty); //Fire off the event. In this case is a selecting unit event
+        OnActionStarted?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetSelectingAction(BaseAction baseAction)
@@ -96,7 +103,7 @@ public class UnitActionSystem : MonoBehaviour
         return selectingUnit;
     }
 
-    public BaseAction GetSelectimgAction()
+    public BaseAction GetSelectingAction()
     {
         return selectedAction;
     }

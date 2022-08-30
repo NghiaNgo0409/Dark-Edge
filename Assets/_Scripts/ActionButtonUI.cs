@@ -36,7 +36,7 @@ public class ActionButtonUI : MonoBehaviour
 
     public void UpdateSelectedVisual()
     {
-        BaseAction selectedBaseAction = UnitActionSystem.Instance.GetSelectimgAction();
+        BaseAction selectedBaseAction = UnitActionSystem.Instance.GetSelectingAction();
 
         selectedVisual.SetActive(selectedBaseAction == baseAction);
     }
