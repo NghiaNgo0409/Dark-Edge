@@ -14,6 +14,8 @@ public class Unit : MonoBehaviour
     SpinAction spinAction;
     BaseAction[] baseActionArray;
     int actionPoints = ACTION_MAX_POINTS;
+
+    [SerializeField] bool isEnemy;
     void Awake()
     {
         moveAction = GetComponent<MoveAction>();
@@ -66,6 +68,11 @@ public class Unit : MonoBehaviour
         return actionPoints;
     }
 
+    public bool IsEnemy()
+    {
+        return isEnemy;
+    }
+
     public bool TrySpendActionPointsToTakeAction(BaseAction baseAction)
     {
         if(CanSpendActionPointsToTakeAction(baseAction))
@@ -93,9 +100,12 @@ public class Unit : MonoBehaviour
 
     private void OnTurnChanged_UpdateSystem(object sender, EventArgs e)
     {
-        actionPoints = ACTION_MAX_POINTS;
+        if((IsEnemy() && !TurnSystem.Instance.IsPlayerTurn()) || (!IsEnemy() && TurnSystem.Instance.IsPlayerTurn()))
+        {
+            actionPoints = ACTION_MAX_POINTS;
 
-        OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
     
 }
