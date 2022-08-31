@@ -10,8 +10,11 @@ public class UnitAnimator : MonoBehaviour
     [SerializeField] Transform shootingPoint;
     void Awake()
     {
-        animator = GetComponentInChildren<Animator>();;
-
+        animator = GetComponentInChildren<Animator>();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
         if(TryGetComponent<MoveAction>(out MoveAction moveAction))
         {
             moveAction.OnStartMoving += MoveAction_OnStartMoving;
@@ -22,11 +25,6 @@ public class UnitAnimator : MonoBehaviour
         {
             shootAction.OnShooting += ShootAction_OnShooting;
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
