@@ -41,8 +41,7 @@ public class MoveAction : BaseAction
         else
         {
             unitAnim.SetBool("isRunning", false);
-            isActive = false;
-            onMoveCompleted();
+            ActionComplete();
         }
     }
 
@@ -81,9 +80,8 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onMoveCompleted)
     {
-        this.onMoveCompleted = onMoveCompleted;
+        ActionStart(onMoveCompleted);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
-        isActive = true;
     }
 
     public override string GetBaseActionName()

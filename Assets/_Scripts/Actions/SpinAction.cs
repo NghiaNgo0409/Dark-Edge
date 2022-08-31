@@ -30,17 +30,15 @@ public class SpinAction : BaseAction
 
         if(totalSpinAmount > 360f)
         {
-            isActive = false;
             totalSpinAmount = 0;
-            onSpinCompleted();
+            ActionComplete();
         }
     }
 
     public override void TakeAction(GridPosition gridPosition, Action onSpinCompleted)
     {
-        this.onSpinCompleted = onSpinCompleted;
+        ActionStart(onSpinCompleted);
         totalSpinAmount = 0;
-        isActive = true;
     }
 
     public override List<GridPosition> GetValidActionGridPosition()

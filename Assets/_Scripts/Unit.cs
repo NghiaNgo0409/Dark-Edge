@@ -63,6 +63,11 @@ public class Unit : MonoBehaviour
         return gridPosition;
     }
 
+    public Vector3 GetWorldPosition()
+    {
+        return transform.position;
+    }
+
     public int GetActionPoints()
     {
         return actionPoints;
@@ -106,6 +111,11 @@ public class Unit : MonoBehaviour
 
             OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public void Damage()
+    {
+        Debug.Log(transform.name + " damaged!");
     }
     
 }

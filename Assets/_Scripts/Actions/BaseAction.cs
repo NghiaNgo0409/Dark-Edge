@@ -7,6 +7,7 @@ public abstract class BaseAction : MonoBehaviour
 {
     protected Unit unit;
     protected bool isActive;
+    protected Action onActionCompleted;
     protected virtual void Awake()
     {
         unit = GetComponent<Unit>();
@@ -38,5 +39,17 @@ public abstract class BaseAction : MonoBehaviour
     public virtual int GetActionPoints()
     {
         return 1;
+    }
+
+    protected void ActionStart(Action onActionCompleted)
+    {
+        this.onActionCompleted = onActionCompleted;
+        isActive = true;
+    }
+
+    protected void ActionComplete()
+    {
+        isActive = false;
+        onActionCompleted();
     }
 }
