@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class MoveAction : BaseAction
 {
+    public event EventHandler OnStartMoving;
+    public event EventHandler OnStopMoving;
+
     Vector3 targetPosition;
     float stoppingDistance = .1f;
     float rotateSpeed = 10f;
-    
-    Animator unitAnim;
     [SerializeField] int maxMoveDistance;
 
     public Action onMoveCompleted;
     protected override void Awake() 
     {
         base.Awake();
-        unitAnim = GetComponentInChildren<Animator>();
         targetPosition = transform.position;
     }
     // Start is called before the first frame update
@@ -32,7 +32,6 @@ public class MoveAction : BaseAction
 
         if(Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
         {
-            unitAnim.SetBool("isRunning", true);
             Vector3 desiredDirection = (targetPosition - transform.position).normalized;
             float moveSpeed = 10f;
             transform.position += desiredDirection * moveSpeed * Time.deltaTime;
@@ -40,8 +39,8 @@ public class MoveAction : BaseAction
         }
         else
         {
-            unitAnim.SetBool("isRunning", false);
             ActionComplete();
+            OnStopMoving?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -81,6 +80,7 @@ public class MoveAction : BaseAction
     public override void TakeAction(GridPosition gridPosition, Action onMoveCompleted)
     {
         ActionStart(onMoveCompleted);
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
     }
 

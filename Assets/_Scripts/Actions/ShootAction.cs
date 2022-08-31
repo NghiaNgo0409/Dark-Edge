@@ -10,6 +10,14 @@ public enum State
 }
 public class ShootAction : BaseAction
 {
+    public event EventHandler<OnShootEventArgs> OnShooting;
+
+    public class OnShootEventArgs : EventArgs
+    {
+        public Unit targetUnit;
+        public Unit shootingUnit;
+    }
+
     [SerializeField] int maxShootDistance;
 
     State state;
@@ -87,6 +95,11 @@ public class ShootAction : BaseAction
 
     void Shoot()
     {
+        OnShooting?.Invoke(this, new OnShootEventArgs
+        {
+            targetUnit = targetUnit,
+            shootingUnit = unit
+        });
         targetUnit.Damage();
     }
 

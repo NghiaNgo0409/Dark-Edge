@@ -111,6 +111,8 @@ GameObject:
   - component: {fileID: 2445508724000326145}
   - component: {fileID: 2445508724000326144}
   - component: {fileID: 5674160662922820917}
+  - component: {fileID: 3001015265782126149}
+  - component: {fileID: 7822639835316145641}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -133,7 +135,7 @@ Transform:
   - {fileID: 2445508724165452528}
   - {fileID: 2445508723576163293}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2445508724000326147
 BoxCollider:
@@ -196,6 +198,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 416abe54f703fe141855048001b9d7b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3001015265782126149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445508724000326149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db7ea2afb92ba94c8757ca7881006a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShootDistance: 7
+  rotateSpeed: 7
+--- !u!114 &7822639835316145641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445508724000326149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed9f6e8abd5b2949b65b716e6606ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2445508724165852560
