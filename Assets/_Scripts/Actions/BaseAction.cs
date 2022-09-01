@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class BaseAction : MonoBehaviour
 {
+    public static event EventHandler OnAnyActionStarted;
+    public static event EventHandler OnAnyActionCompleted;
+
     protected Unit unit;
     protected bool isActive;
     protected Action onActionCompleted;
@@ -41,15 +44,22 @@ public abstract class BaseAction : MonoBehaviour
         return 1;
     }
 
+    public Unit GetUnit()
+    {
+        return unit;
+    }
+
     protected void ActionStart(Action onActionCompleted)
     {
         this.onActionCompleted = onActionCompleted;
         isActive = true;
+        OnAnyActionStarted?.Invoke(this, EventArgs.Empty);
     }
 
     protected void ActionComplete()
     {
         isActive = false;
         onActionCompleted();
+        OnAnyActionCompleted?.Invoke(this, EventArgs.Empty);
     }
 }

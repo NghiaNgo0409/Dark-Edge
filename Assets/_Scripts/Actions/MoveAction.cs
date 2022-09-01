@@ -39,8 +39,8 @@ public class MoveAction : BaseAction
         }
         else
         {
-            ActionComplete();
             OnStopMoving?.Invoke(this, EventArgs.Empty);
+            ActionComplete();
         }
     }
 
@@ -79,9 +79,9 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onMoveCompleted)
     {
-        ActionStart(onMoveCompleted);
         OnStartMoving?.Invoke(this, EventArgs.Empty);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        ActionStart(onMoveCompleted);
     }
 
     public override string GetBaseActionName()
