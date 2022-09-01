@@ -5,7 +5,18 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    enum State
+    {
+        WaitingForEnemyTurn,
+        TakingTurn,
+        Busy
+    }
+    State state;
     float timer;
+    void Awake()
+    {
+        state = State.WaitingForEnemyTurn;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -15,17 +26,73 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TurnSystem.Instance.IsPlayerTurn()) return;
+        if (TurnSystem.Instance.IsPlayerTurn()) return;
 
-        timer -= Time.deltaTime;
-        if(timer <= 0)
+        switch (state)
         {
-            TurnSystem.Instance.NextTurn();
+            case State.WaitingForEnemyTurn:
+                break;
+            case State.TakingTurn:
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    if(TryTakeEnemyAIAction(SetStateTakingTurn))
+                    {
+                        state = State.Busy;
+                    }
+                    else
+                    {
+                        TurnSystem.Instance.NextTurn();
+                    }
+                }
+                break;
+            case State.Busy:
+                break;
         }
+    }
+
+    void SetStateTakingTurn()
+    {
+        timer = .5f;
+        state = State.TakingTurn;
     }
 
     void OnTurnChanged_UpdateTurnSystem(object sender, EventArgs e)
     {
-        timer = 2f;
+        if (!TurnSystem.Instance.IsPlayerTurn())
+        {
+            state = State.TakingTurn;
+            timer = 2f;
+        }
+    }
+
+    bool TryTakeEnemyAIAction(Action onActionCompleted)
+    {
+        foreach (Unit enemy in UnitManager.Instance.GetEnemyUnitList())
+        {
+            if(TryTakeEnemyAIAction(enemy, onActionCompleted))
+            {
+                return true;
+            }
+            
+        }
+        return false;
+    }
+
+    bool TryTakeEnemyAIAction(Unit enemy, Action onActionCompleted)
+    {
+        SpinAction spinAction = enemy.GetSpinAction();
+
+        GridPosition unitGridPosition = enemy.GetGridPosition();
+
+        if (spinAction.IsValidActionGridPosition(unitGridPosition))
+        {
+            if (enemy.TrySpendActionPointsToTakeAction(spinAction))
+            {
+                spinAction.TakeAction(unitGridPosition, SetStateTakingTurn);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -8,6 +8,8 @@ public class Unit : MonoBehaviour
     const int ACTION_MAX_POINTS = 2;
 
     public static event EventHandler OnAnyActionPointsChanged;
+    public static event EventHandler OnAnyUnitSpawned;
+    public static event EventHandler OnAnyUnitDead;
 
     GridPosition gridPosition;
     HealthSystem healthSystem;
@@ -33,6 +35,8 @@ public class Unit : MonoBehaviour
         healthSystem.OnDead += HealthSystem_OnDead;
 
         TurnSystem.Instance.OnTurnChanged += OnTurnChanged_UpdateSystem;
+        
+        OnAnyUnitSpawned?.Invoke(this, EventArgs.Empty);
     }
 
     // Update is called once per frame
@@ -124,6 +128,7 @@ public class Unit : MonoBehaviour
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
         GridSystemVisual.Instance.UpdateVisualGrid();
         Destroy(gameObject);
+        OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
     }
 
     public void Damage()
