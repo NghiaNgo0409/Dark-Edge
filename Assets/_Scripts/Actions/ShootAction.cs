@@ -137,7 +137,7 @@ public class ShootAction : BaseAction
 
                 Unit targetUnit = LevelGrid.Instance.GetAnyUnitAtGridPosition(testGridPosition);
                 //Do not shoot the grid position when the units are in the same team
-                if(targetUnit.IsEnemy() && unit.IsEnemy())
+                if(targetUnit.IsEnemy() == unit.IsEnemy())
                 {
                     continue;
                 }
@@ -165,5 +165,10 @@ public class ShootAction : BaseAction
     public Unit GetTargetUnit()
     {
         return targetUnit;
+    }
+
+    public int GetMaxDistance()
+    {
+        return maxShootDistance;
     }
 }
