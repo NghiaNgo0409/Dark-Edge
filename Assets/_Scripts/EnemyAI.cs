@@ -81,18 +81,55 @@ public class EnemyAI : MonoBehaviour
 
     bool TryTakeEnemyAIAction(Unit enemy, Action onActionCompleted)
     {
-        SpinAction spinAction = enemy.GetSpinAction();
+        EnemyAIAction bestEnemyAIAction = null;
+        BaseAction bestBaseAction = null;
 
-        GridPosition unitGridPosition = enemy.GetGridPosition();
-
-        if (spinAction.IsValidActionGridPosition(unitGridPosition))
+        foreach(BaseAction baseAction in enemy.GetBaseActionArray())
         {
-            if (enemy.TrySpendActionPointsToTakeAction(spinAction))
+            if(!enemy.CanSpendActionPointsToTakeAction(baseAction))
             {
-                spinAction.TakeAction(unitGridPosition, SetStateTakingTurn);
-                return true;
+                continue;
+            }
+
+            if(bestEnemyAIAction == null)
+            {
+                bestEnemyAIAction = baseAction.GetBestEnemyAIAction();
+                bestBaseAction = baseAction;
+            }
+            else
+            {
+                EnemyAIAction testEnemyAIAction =  baseAction.GetBestEnemyAIAction();
+                if(testEnemyAIAction != null && testEnemyAIAction.actionValues > bestEnemyAIAction.actionValues)
+                {
+                    bestEnemyAIAction = testEnemyAIAction;
+                    bestBaseAction = baseAction;
+                }
             }
         }
-        return false;
+
+        if(bestEnemyAIAction != null && enemy.TrySpendActionPointsToTakeAction(bestBaseAction))
+        {
+            bestBaseAction.TakeAction(bestEnemyAIAction.gridPosition, onActionCompleted);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+        // SpinAction spinAction = enemy.GetSpinAction();
+
+        // GridPosition unitGridPosition = enemy.GetGridPosition();
+
+        // if (spinAction.IsValidActionGridPosition(unitGridPosition))
+        // {
+        //     if (enemy.TrySpendActionPointsToTakeAction(spinAction))
+        //     {
+        //         spinAction.TakeAction(unitGridPosition, SetStateTakingTurn);
+        //         return true;
+        //     }
+        // }
+        // return false;
     }
 }

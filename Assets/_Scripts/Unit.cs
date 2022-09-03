@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
     HealthSystem healthSystem;
     MoveAction moveAction;
     SpinAction spinAction;
+    ShootAction shootAction; 
     BaseAction[] baseActionArray;
     int actionPoints = ACTION_MAX_POINTS;
 
@@ -24,6 +25,7 @@ public class Unit : MonoBehaviour
         healthSystem = GetComponent<HealthSystem>();
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
+        shootAction = GetComponent<ShootAction>();
         baseActionArray = GetComponents<BaseAction>();
     }
     // Start is called before the first frame update
@@ -63,6 +65,11 @@ public class Unit : MonoBehaviour
         return spinAction;
     }
 
+    public ShootAction GetShootAction()
+    {
+        return shootAction;
+    }
+
     public BaseAction[] GetBaseActionArray()
     {
         return baseActionArray;
@@ -86,6 +93,11 @@ public class Unit : MonoBehaviour
     public bool IsEnemy()
     {
         return isEnemy;
+    }
+
+    public float GetHealthNormalized()
+    {
+        return healthSystem.GetHealthNormalized();
     }
 
     public bool TrySpendActionPointsToTakeAction(BaseAction baseAction)
