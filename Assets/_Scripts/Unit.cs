@@ -12,10 +12,7 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyUnitDead;
 
     GridPosition gridPosition;
-    HealthSystem healthSystem;
-    MoveAction moveAction;
-    SpinAction spinAction;
-    ShootAction shootAction; 
+    HealthSystem healthSystem; 
     BaseAction[] baseActionArray;
     int actionPoints = ACTION_MAX_POINTS;
 
@@ -23,9 +20,6 @@ public class Unit : MonoBehaviour
     void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
-        moveAction = GetComponent<MoveAction>();
-        spinAction = GetComponent<SpinAction>();
-        shootAction = GetComponent<ShootAction>();
         baseActionArray = GetComponents<BaseAction>();
     }
     // Start is called before the first frame update
@@ -55,19 +49,16 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public MoveAction GetMoveAction()
+    public T GetAction<T>() where T : BaseAction
     {
-        return moveAction;
-    }
-
-    public SpinAction GetSpinAction()
-    {
-        return spinAction;
-    }
-
-    public ShootAction GetShootAction()
-    {
-        return shootAction;
+        foreach(BaseAction baseAction in baseActionArray)
+        {
+            if(baseAction is T)
+            {
+                return (T)baseAction;
+            }
+        }
+        return null;
     }
 
     public BaseAction[] GetBaseActionArray()

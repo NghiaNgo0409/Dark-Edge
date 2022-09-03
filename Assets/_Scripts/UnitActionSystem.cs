@@ -91,7 +91,7 @@ public class UnitActionSystem : MonoBehaviour
     public void SetSelectingUnit(Unit unit)
     {
         selectingUnit = unit;
-        SetSelectingAction(unit.GetMoveAction());
+        SetSelectingAction(unit.GetAction<MoveAction>());
         
         OnSelectedUnitChange?.Invoke(this, EventArgs.Empty); //Fire off the event. In this case is a selecting unit event
         OnActionStarted?.Invoke(this, EventArgs.Empty);

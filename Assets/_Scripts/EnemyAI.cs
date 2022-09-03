@@ -116,20 +116,5 @@ public class EnemyAI : MonoBehaviour
         {
             return false;
         }
-
-
-        // SpinAction spinAction = enemy.GetSpinAction();
-
-        // GridPosition unitGridPosition = enemy.GetGridPosition();
-
-        // if (spinAction.IsValidActionGridPosition(unitGridPosition))
-        // {
-        //     if (enemy.TrySpendActionPointsToTakeAction(spinAction))
-        //     {
-        //         spinAction.TakeAction(unitGridPosition, SetStateTakingTurn);
-        //         return true;
-        //     }
-        // }
-        // return false;
     }
 }
