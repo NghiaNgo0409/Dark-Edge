@@ -22,7 +22,7 @@ public class LevelGrid : MonoBehaviour
             Instance = this;
         }
         gridSystem = new GridSystem<GridObject>(10, 10, 2, (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
-        gridSystem.CreateGridObject(gridPrefab);
+        // gridSystem.CreateGridObject(gridPrefab);
     }
 
     // Update is called once per frame
