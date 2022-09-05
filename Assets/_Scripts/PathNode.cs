@@ -34,4 +34,39 @@ public class PathNode
     {
         return fCost;
     }
+
+    public GridPosition GetGridPosition()
+    {
+        return gridPosition;
+    }
+
+    public void SetGCost(int gCost)
+    {
+        this.gCost = gCost;
+    }
+
+    public void SetHCost(int hCost)
+    {
+        this.hCost = hCost;
+    }
+
+    public void CalculateFCost()
+    {
+        fCost = gCost + hCost;
+    }
+
+    public void ResetCameFromPathNode()
+    {
+        cameFromPathNode = null;
+    }
+
+    public void SetCameFromPathNode(PathNode currentNode)
+    {
+        cameFromPathNode = currentNode;
+    }
+
+    public PathNode GetCameFromPathNode()
+    {
+        return cameFromPathNode;
+    }
 }

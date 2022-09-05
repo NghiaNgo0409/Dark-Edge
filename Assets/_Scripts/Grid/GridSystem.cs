@@ -7,11 +7,11 @@ public class GridSystem<TGridObject>
 {
     int width;
     int height;
-    int cellSize;
+    float cellSize;
 
     TGridObject[,] gridObjectArray;
 
-    public GridSystem(int width, int height, int cellSize, Func<GridSystem<TGridObject>, GridPosition, TGridObject> createGridObject)
+    public GridSystem(int width, int height, float cellSize, Func<GridSystem<TGridObject>, GridPosition, TGridObject> createGridObject)
     {
         this.width = width;
         this.height = height;
@@ -37,8 +37,8 @@ public class GridSystem<TGridObject>
     public GridPosition GetGridPosition(Vector3 worldPosition)
     {
         return ( new GridPosition(
-            Mathf.RoundToInt(worldPosition.x) / cellSize,
-            Mathf.RoundToInt(worldPosition.z) / cellSize
+            Mathf.RoundToInt(worldPosition.x / cellSize),
+            Mathf.RoundToInt(worldPosition.z / cellSize)
         ));
     }
 
@@ -51,7 +51,7 @@ public class GridSystem<TGridObject>
                 GridPosition gridPosition = new GridPosition(x, z);
                 Transform debugObject = GameObject.Instantiate(gridObject, GetWorldPosition(gridPosition), Quaternion.identity);
                 GridDebugObject gridDebugObject = debugObject.GetComponent<GridDebugObject>();
-                gridDebugObject.SetGridObject(GetGridObject(gridPosition) as GridObject);
+                gridDebugObject.SetGridObject(GetGridObject(gridPosition));
             }
         }
     }
