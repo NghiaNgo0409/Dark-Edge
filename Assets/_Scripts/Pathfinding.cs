@@ -9,6 +9,7 @@ public class Pathfinding : MonoBehaviour
     const int MOVE_STRAIGHT_COST = 10;
     const int MOVE_DIAGONAL_COST = 14;
     [SerializeField] Transform gridPrefab;
+    [SerializeField] LayerMask obstacleLayer;
     int width;
     int height;
     float cellSize;
@@ -23,9 +24,6 @@ public class Pathfinding : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        gridSystem = new GridSystem<PathNode>(10, 10, 2f, (GridSystem<PathNode> g, GridPosition gridPosition) => new PathNode(gridPosition));
-        gridSystem.CreateGridObject(gridPrefab);
     }
     // Start is called before the first frame update
     void Start()
@@ -37,6 +35,30 @@ public class Pathfinding : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void Setup(int width, int height, float cellSize)
+    {
+        this.width = width;
+        this.height = height;
+        this.cellSize = cellSize;
+
+        gridSystem = new GridSystem<PathNode>(10, 10, 2f, (GridSystem<PathNode> g, GridPosition gridPosition) => new PathNode(gridPosition));
+        gridSystem.CreateGridObject(gridPrefab);
+
+        for(int x = 0; x < width; x++)
+        {
+            for(int z = 0; z < height; z++)
+            {
+                GridPosition gridPosition = new GridPosition(x, z);
+                Vector3 worldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+                float raycastOffset = 5f;
+                if(Physics.Raycast(worldPosition + Vector3.down * raycastOffset, Vector3.up * raycastOffset, raycastOffset, obstacleLayer))
+                {
+                    GetNode(x, z).SetIsWalkable(false);
+                }
+            }
+        }
     }
 
     public List<GridPosition> FindPath(GridPosition startGridPosition, GridPosition endGridPosition)
@@ -83,6 +105,12 @@ public class Pathfinding : MonoBehaviour
             {
                 if(closedList.Contains(neighbourNode))
                 {
+                    continue;
+                }
+
+                if(!neighbourNode.IsWalkable())
+                {
+                    closedList.Add(neighbourNode);
                     continue;
                 }
 
