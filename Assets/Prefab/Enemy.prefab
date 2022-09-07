@@ -274,7 +274,7 @@ Transform:
   - {fileID: 2445508723576163293}
   - {fileID: 3550494683705200860}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2445508724000326398
 MonoBehaviour:
@@ -327,6 +327,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxShootDistance: 7
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
   rotateSpeed: 7
 --- !u!114 &7822639835316145641
 MonoBehaviour:
