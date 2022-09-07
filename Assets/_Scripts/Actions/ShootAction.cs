@@ -10,6 +10,7 @@ public enum State
 }
 public class ShootAction : BaseAction
 {
+    public static event EventHandler<OnShootEventArgs> OnAnyShootActions;
     public event EventHandler<OnShootEventArgs> OnShooting;
 
     public class OnShootEventArgs : EventArgs
@@ -96,6 +97,12 @@ public class ShootAction : BaseAction
 
     void Shoot()
     {
+        OnAnyShootActions?.Invoke(this, new OnShootEventArgs
+        {
+            targetUnit = targetUnit,
+            shootingUnit = unit
+        });
+
         OnShooting?.Invoke(this, new OnShootEventArgs
         {
             targetUnit = targetUnit,
