@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 2133016247836961975}
   - component: {fileID: 5067829990261502654}
   - component: {fileID: 2790586319925677552}
+  - component: {fileID: 6631168188878528825}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -521,6 +522,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxShootDistance: 7
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
   rotateSpeed: 7
 --- !u!114 &5067829990261502654
 MonoBehaviour:
@@ -550,6 +554,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+--- !u!114 &6631168188878528825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449730142463546048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f501fa578185424e8a1d5323f2e4a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxThrowDistance: 7
+  grenadePrefab: {fileID: 4055342408520687348, guid: 5a101ca55afbc1c46b1234c62603a2e0,
+    type: 3}
 --- !u!1 &6449730142534965500
 GameObject:
   m_ObjectHideFlags: 0
