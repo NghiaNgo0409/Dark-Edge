@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GrenadeProjectile : MonoBehaviour
 {
-    public static EventHandler OnAnyGrenadeExploded; 
+    public static event EventHandler OnAnyGrenadeExploded; 
     Action onGrenadeComplete;
     Vector3 targetPosition;
     [SerializeField] float moveSpeed;
@@ -43,6 +43,11 @@ public class GrenadeProjectile : MonoBehaviour
                 if(collider.TryGetComponent<Unit>(out Unit unit))
                 {
                     unit.Damage();
+                }
+
+                if(collider.TryGetComponent<DestructibleCrate>(out DestructibleCrate crate))
+                {
+                    crate.Damage();
                 }
                 
             }
