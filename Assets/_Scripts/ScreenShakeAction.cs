@@ -8,7 +8,8 @@ public class ScreenShakeAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShootAction.OnAnyShootActions += ShootAction_OnAnyShootActions;        
+        ShootAction.OnAnyShootActions += ShootAction_OnAnyShootActions;
+        GrenadeProjectile.OnAnyGrenadeExploded += GrenadeProjectile_OnAnyGrenadeExploded;        
     }
 
     // Update is called once per frame
@@ -20,5 +21,10 @@ public class ScreenShakeAction : MonoBehaviour
     void ShootAction_OnAnyShootActions(object sender, ShootAction.OnShootEventArgs e)
     {
         ScreenShake.Instance.Shake();
+    }
+
+    void GrenadeProjectile_OnAnyGrenadeExploded(object sender, EventArgs e)
+    {
+        ScreenShake.Instance.Shake(5f);
     }
 }
