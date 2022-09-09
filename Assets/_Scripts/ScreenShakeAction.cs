@@ -9,7 +9,8 @@ public class ScreenShakeAction : MonoBehaviour
     void Start()
     {
         ShootAction.OnAnyShootActions += ShootAction_OnAnyShootActions;
-        GrenadeProjectile.OnAnyGrenadeExploded += GrenadeProjectile_OnAnyGrenadeExploded;        
+        GrenadeProjectile.OnAnyGrenadeExploded += GrenadeProjectile_OnAnyGrenadeExploded;     
+        SwordAction.OnAnySwordAction += SwordAction_OnAnySwordAction;    
     }
 
     // Update is called once per frame
@@ -26,5 +27,10 @@ public class ScreenShakeAction : MonoBehaviour
     void GrenadeProjectile_OnAnyGrenadeExploded(object sender, EventArgs e)
     {
         ScreenShake.Instance.Shake(5f);
+    }
+
+    void SwordAction_OnAnySwordAction(object sender, EventArgs e) 
+    {
+        ScreenShake.Instance.Shake(2f);
     }
 }

@@ -42,7 +42,7 @@ public class GrenadeProjectile : MonoBehaviour
             {
                 if(collider.TryGetComponent<Unit>(out Unit unit))
                 {
-                    unit.Damage();
+                    unit.Damage(60);
                 }
 
                 if(collider.TryGetComponent<DestructibleCrate>(out DestructibleCrate crate))

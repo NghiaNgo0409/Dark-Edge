@@ -17,6 +17,8 @@ public class Unit : MonoBehaviour
     int actionPoints = ACTION_MAX_POINTS;
 
     [SerializeField] bool isEnemy;
+    
+    [SerializeField] Transform bloodSplashVFXPrefab;
     void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
@@ -134,9 +136,10 @@ public class Unit : MonoBehaviour
         OnAnyUnitDead?.Invoke(this, EventArgs.Empty);
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
-        healthSystem.Damage(40);
+        healthSystem.Damage(damage);
+        Instantiate(bloodSplashVFXPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
     }
     
 }

@@ -289,6 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  bloodSplashVFXPrefab: {fileID: 9014965886396037408, guid: c7bbb91f22e065f4ca4f842afd2fed46,
+    type: 3}
 --- !u!114 &2445508724000326145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +348,8 @@ MonoBehaviour:
   bulletProjectilePrefab: {fileID: 1700264450859006259, guid: 892efcbf39b2d3440a302846793a1c10,
     type: 3}
   shootingPoint: {fileID: 837370285634254604}
+  swordTransform: {fileID: 0}
+  rifleTransform: {fileID: 0}
 --- !u!114 &1682859859855255727
 MonoBehaviour:
   m_ObjectHideFlags: 0
