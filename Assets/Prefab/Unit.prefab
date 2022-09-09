@@ -434,6 +434,7 @@ GameObject:
   - component: {fileID: 2790586319925677552}
   - component: {fileID: 6631168188878528825}
   - component: {fileID: 5962567202202998132}
+  - component: {fileID: 3759152722392819751}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -472,6 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  bloodSplashVFXPrefab: {fileID: 0}
 --- !u!65 &6982879861831462573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -586,6 +588,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSwordDistance: 1
   rotateSpeed: 7
+--- !u!114 &3759152722392819751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449730142463546048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29af04f4aada37f42a8d00e492f66605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxInteractDistance: 1
 --- !u!1 &6449730142534965500
 GameObject:
   m_ObjectHideFlags: 0
