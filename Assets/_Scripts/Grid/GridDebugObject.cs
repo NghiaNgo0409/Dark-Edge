@@ -15,6 +15,6 @@ public class GridDebugObject : MonoBehaviour
 
     protected virtual void Update()
     {
-        text.text = gridObject.ToString();
+        // text.text = gridObject.ToString();
     }
 }

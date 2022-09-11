@@ -9,6 +9,7 @@ public class HealthSystem : MonoBehaviour
     public event EventHandler OnDamage;
 
     [SerializeField] int health;
+    [SerializeField] Transform ragdollRootBone;
     int healthMax;
     // Start is called before the first frame update
     void Start()

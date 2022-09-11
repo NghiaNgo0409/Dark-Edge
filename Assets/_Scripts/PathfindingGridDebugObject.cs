@@ -19,10 +19,10 @@ public class PathfindingGridDebugObject : GridDebugObject
     // Update is called once per frame
     protected override void Update()
     {
-        base.Update();
-        gCostText.text = pathNode.GetGCost().ToString();
-        hCostText.text = pathNode.GetHCost().ToString();
-        fCostText.text = pathNode.GetFCost().ToString();
+        // base.Update();
+        // gCostText.text = pathNode.GetGCost().ToString();
+        // hCostText.text = pathNode.GetHCost().ToString();
+        // fCostText.text = pathNode.GetFCost().ToString();
 
     }
 }

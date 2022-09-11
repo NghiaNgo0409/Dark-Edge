@@ -6,6 +6,7 @@ public class EnemyAIAction
 {
     public GridPosition gridPosition;
     public int actionValues;
+    public string actionName;
     // Start is called before the first frame update
     void Start()
     {

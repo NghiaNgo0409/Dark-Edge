@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 6631168188878528825}
   - component: {fileID: 5962567202202998132}
   - component: {fileID: 3759152722392819751}
+  - component: {fileID: -6162612327395806886}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -473,7 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  bloodSplashVFXPrefab: {fileID: 0}
+  bloodSplashVFXPrefab: {fileID: 9014965886396037408, guid: c7bbb91f22e065f4ca4f842afd2fed46,
+    type: 3}
 --- !u!65 &6982879861831462573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -527,7 +529,7 @@ MonoBehaviour:
   maxShootDistance: 7
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   rotateSpeed: 7
 --- !u!114 &5067829990261502654
 MonoBehaviour:
@@ -601,6 +603,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxInteractDistance: 1
+--- !u!114 &-6162612327395806886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6449730142463546048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4429a7bc38a6948bcf735ddccbcdaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ragdollPrefab: {fileID: 6449730142463546051, guid: 79379ddcc30ec3544976a925336891bf,
+    type: 3}
+  originalRootBone: {fileID: 6449730141897118830}
 --- !u!1 &6449730142534965500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,6 +1336,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2659372486161794721}
   m_SourcePrefab: {fileID: 100100000, guid: cf506bef31605074a8b1bd575d6eda39, type: 3}
+--- !u!4 &6449730141897118830 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 434522, guid: cf506bef31605074a8b1bd575d6eda39,
+    type: 3}
+  m_PrefabInstance: {fileID: 6449730141897553204}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6449730141897203308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 486232, guid: cf506bef31605074a8b1bd575d6eda39,

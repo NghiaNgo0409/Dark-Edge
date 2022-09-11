@@ -81,7 +81,8 @@ public class SwordAction : BaseAction
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValues = 200
+            actionValues = 50,
+            actionName = "Sword Action"
         };
     }
 
@@ -133,5 +134,10 @@ public class SwordAction : BaseAction
     public int GetMaxDistance()
     {
         return maxSwordDistance;
+    }
+
+    public int GetTargetCountAtPosition(GridPosition gridPosition)
+    {
+        return GetValidActionGridPosition().Count;
     }
 }

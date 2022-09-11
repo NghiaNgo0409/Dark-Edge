@@ -30,11 +30,21 @@ public class UnitAnimator : MonoBehaviour
             swordAction.OnSwordActionStarted += SwordAction_OnSwordActionStarted; 
             swordAction.OnSwordActionCompleted += SwordAction_OnSwordActionCompleted; 
         }
+        if(TryGetComponent<ZombieAttackAction>(out ZombieAttackAction zombieAttackAction))
+        {
+            zombieAttackAction.OnZombieAttackStarted += ZombieAttackAction_OnZombieAttackStarted;
+            zombieAttackAction.OnZombieAttackCompleted += ZombieAttackAction_OnZombieAttackCompleted;
+        }
     }
     // Start is called before the first frame update
     void Start()
     {
-        EquipRifle();
+        GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        Unit unit = LevelGrid.Instance.GetAnyUnitAtGridPosition(gridPosition);
+        if(!unit.IsEnemy())
+        {
+            EquipRifle();
+        }
     }
 
     // Update is called once per frame
@@ -73,6 +83,16 @@ public class UnitAnimator : MonoBehaviour
     void SwordAction_OnSwordActionCompleted(object sender, EventArgs e) 
     {
         EquipRifle();
+    }
+
+    void ZombieAttackAction_OnZombieAttackStarted(object sender, EventArgs e)
+    {
+        animator.SetTrigger("Eat");
+    }
+
+    void ZombieAttackAction_OnZombieAttackCompleted(object sender, EventArgs e) 
+    {
+
     }
 
     

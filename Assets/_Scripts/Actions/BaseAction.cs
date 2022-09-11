@@ -73,11 +73,14 @@ public abstract class BaseAction : MonoBehaviour
         {
             EnemyAIAction enemyAIAction = GetEnemyAIAction(gridPosition);
             enemyAIActionList.Add(enemyAIAction);
+            Debug.Log(enemyAIAction.actionName);
+            Debug.Log(enemyAIAction.actionValues);
         }
 
         if(enemyAIActionList.Count > 0)
         {
             enemyAIActionList.Sort((EnemyAIAction a, EnemyAIAction b) => b.actionValues - a.actionValues);
+            foreach(EnemyAIAction enemyAIAction in enemyAIActionList) Debug.Log(enemyAIAction.actionName);
             return enemyAIActionList[0];
         }
         else
