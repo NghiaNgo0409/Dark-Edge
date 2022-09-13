@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7961691539189897806}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7961691539838629822
 MonoBehaviour:
@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destructibleCratePrefab: {fileID: 7961691539838629823, guid: 5c31853d86513f04aba12d5c3ea56c7c,
     type: 3}
+  explosionForce: 300
+  explosionRange: 20
 --- !u!65 &7961691539838629825
 BoxCollider:
   m_ObjectHideFlags: 0

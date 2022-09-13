@@ -8,6 +8,8 @@ public class DestructibleCrate : MonoBehaviour
     public static event EventHandler OnAnyCrateDestroyed;
     GridPosition gridPosition;
     [SerializeField] Transform destructibleCratePrefab;
+    [SerializeField] float explosionForce;
+    [SerializeField] float explosionRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,7 @@ public class DestructibleCrate : MonoBehaviour
     public void Damage()
     {
         Transform crateTransform = Instantiate(destructibleCratePrefab, transform.position, Quaternion.identity);
-        ApplyExplosionToCrate(crateTransform, 300f, transform.position, 20f);
+        ApplyExplosionToCrate(crateTransform, explosionForce, transform.position, explosionRange);
         OnAnyCrateDestroyed?.Invoke(this, EventArgs.Empty);
         Destroy(gameObject);
     }
