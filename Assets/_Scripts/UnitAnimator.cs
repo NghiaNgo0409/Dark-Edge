@@ -39,12 +39,7 @@ public class UnitAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
-        Unit unit = LevelGrid.Instance.GetAnyUnitAtGridPosition(gridPosition);
-        if(!unit.IsEnemy())
-        {
-            EquipRifle();
-        }
+        EquipRifle();
     }
 
     // Update is called once per frame

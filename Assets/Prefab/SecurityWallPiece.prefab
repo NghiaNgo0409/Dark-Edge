@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f186f4b960189e448a0578cba2ba50c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructibleCratePrefab: {fileID: 5582558816171122934, guid: f2537da0224d5cb468697194cc8f847c,
+  destructibleCratePrefab: {fileID: 5582558816171122934, guid: 8ab15aea47414d24e9bad82ad168bf20,
     type: 3}
   explosionForce: 200
   explosionRange: 10
