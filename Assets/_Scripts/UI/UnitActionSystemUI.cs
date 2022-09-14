@@ -46,6 +46,7 @@ public class UnitActionSystemUI : MonoBehaviour
 
         foreach (BaseAction baseAction in selectedUnit.GetBaseActionArray())
         {
+            if((baseAction.GetBaseActionName() == "Shoot" && !selectedUnit.DoesHasGun()) || (baseAction.GetBaseActionName() == "Sword" && !selectedUnit.DoesHasMelee())) continue; 
             Transform baseActionTransform = Instantiate(actionSystemUIPrefab, actionSystemUIContainer);
             ActionButtonUI actionButtonUI = baseActionTransform.GetComponent<ActionButtonUI>();
             actionButtonUI.SetBaseAction(baseAction);

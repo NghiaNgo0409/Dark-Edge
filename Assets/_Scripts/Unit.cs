@@ -17,6 +17,8 @@ public class Unit : MonoBehaviour
     int actionPoints = ACTION_MAX_POINTS;
 
     [SerializeField] bool isEnemy;
+    [SerializeField] bool hasGun;
+    [SerializeField] bool hasMelee = true;
     
     [SerializeField] Transform bloodSplashVFXPrefab;
     void Awake()
@@ -86,6 +88,21 @@ public class Unit : MonoBehaviour
     public bool IsEnemy()
     {
         return isEnemy;
+    }
+
+    public bool DoesHasGun()
+    {
+        return hasGun;
+    }
+
+    public bool DoesHasMelee()
+    {
+        return hasMelee;
+    }
+
+    public void SetWeapon(bool weapon, bool hasOrNot)
+    {
+        weapon = hasOrNot;
     }
 
     public float GetHealthNormalized()
