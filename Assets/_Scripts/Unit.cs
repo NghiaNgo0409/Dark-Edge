@@ -10,6 +10,7 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyActionPointsChanged;
     public static event EventHandler OnAnyUnitSpawned;
     public static event EventHandler OnAnyUnitDead;
+    public static event EventHandler OnAnyUnitPickUpItems;
 
     GridPosition gridPosition;
     HealthSystem healthSystem; 
@@ -100,9 +101,16 @@ public class Unit : MonoBehaviour
         return hasMelee;
     }
 
-    public void SetWeapon(bool weapon, bool hasOrNot)
+    public void SetGun(bool hasOrNot)
     {
-        weapon = hasOrNot;
+        hasGun = hasOrNot;
+        OnAnyUnitPickUpItems?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void SetMelee(bool hasOrNot)
+    {
+        hasMelee = hasOrNot;
+        OnAnyUnitPickUpItems?.Invoke(this, EventArgs.Empty);
     }
 
     public float GetHealthNormalized()

@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 5457752829188224854}
   - component: {fileID: 3698582385133353017}
   - component: {fileID: 3629716304567712792}
-  m_Layer: 0
+  - component: {fileID: 4551201481484411013}
+  - component: {fileID: 6704225700871581035}
+  m_Layer: 8
   m_Name: LootDropLV3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5457752829188224853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.792}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5457752830526693719}
@@ -64,6 +66,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &4551201481484411013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5457752829188224853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3afeafaf6305cc64a810f5fb13f367f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
+--- !u!65 &6704225700871581035
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5457752829188224853}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.6111411, z: 1}
+  m_Center: {x: 0, y: 0.19442947, z: 0}
 --- !u!1 &5457752830526693718
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +103,7 @@ GameObject:
   - component: {fileID: 5457752830526693719}
   - component: {fileID: 5457752830526693705}
   - component: {fileID: 5457752830526693704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LootItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,13 +225,37 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 5457752829188224854}
     m_Modifications:
+    - target: {fileID: 138070, guid: 65389442798920a489c4dd8f72671788, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 171328, guid: 65389442798920a489c4dd8f72671788, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 174560, guid: 65389442798920a489c4dd8f72671788, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 179986, guid: 65389442798920a489c4dd8f72671788, type: 3}
       propertyPath: m_Name
       value: SA_Wep_AssaultRifle01
       objectReference: {fileID: 0}
     - target: {fileID: 179986, guid: 65389442798920a489c4dd8f72671788, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 179986, guid: 65389442798920a489c4dd8f72671788, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 180380, guid: 65389442798920a489c4dd8f72671788, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 189072, guid: 65389442798920a489c4dd8f72671788, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 456384, guid: 65389442798920a489c4dd8f72671788, type: 3}
       propertyPath: m_RootOrder
@@ -249,7 +301,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 64377606942537716, guid: 65389442798920a489c4dd8f72671788, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 65389442798920a489c4dd8f72671788, type: 3}
 --- !u!4 &5457752828875066372 stripped

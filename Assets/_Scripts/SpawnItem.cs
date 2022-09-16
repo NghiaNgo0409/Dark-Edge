@@ -13,9 +13,9 @@ public class SpawnItem : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        offset = new Vector3(Random.Range(-4.0f, 4.0f), offset.y, offset.z);
-        offset = new Vector3(offset.x, Random.Range(0.0f, 3f), offset.z); 
-        offset = new Vector3(offset.x, offset.y, Random.Range(2.0f, 6.0f)); 
+        offset = new Vector3(Random.Range(-4, 4), offset.y, offset.z);
+        offset = new Vector3(offset.x, Random.Range(0, 3), offset.z); 
+        offset = new Vector3(offset.x, offset.y, Random.Range(2, 6)); 
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class SpawnItem : MonoBehaviour
         }
         else 
         { 
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);    
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
         }
     }
 }

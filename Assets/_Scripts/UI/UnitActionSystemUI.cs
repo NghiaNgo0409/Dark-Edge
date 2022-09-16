@@ -23,6 +23,7 @@ public class UnitActionSystemUI : MonoBehaviour
         UnitActionSystem.Instance.OnActionStarted += OnActionStarted_UpdateActionUI;
         TurnSystem.Instance.OnTurnChanged += OnTurnChanged_UpdateSystem;
         Unit.OnAnyActionPointsChanged += OnAnyActionPoinsChanged_UpdateSystem;
+        Unit.OnAnyUnitPickUpItems += Unit_OnAnyUnitPickUpItems; 
         CreateActionUIButtons();
         UpdateSelectedVisual();
         UpdateActionPoints();
@@ -46,7 +47,9 @@ public class UnitActionSystemUI : MonoBehaviour
 
         foreach (BaseAction baseAction in selectedUnit.GetBaseActionArray())
         {
-            if((baseAction.GetBaseActionName() == "Shoot" && !selectedUnit.DoesHasGun()) || (baseAction.GetBaseActionName() == "Sword" && !selectedUnit.DoesHasMelee())) continue; 
+            if((baseAction.GetBaseActionName() == "Shoot" && !selectedUnit.DoesHasGun())) continue;
+
+            if ((baseAction.GetBaseActionName() == "Sword" && !selectedUnit.DoesHasMelee())) continue; 
             Transform baseActionTransform = Instantiate(actionSystemUIPrefab, actionSystemUIContainer);
             ActionButtonUI actionButtonUI = baseActionTransform.GetComponent<ActionButtonUI>();
             actionButtonUI.SetBaseAction(baseAction);
@@ -78,6 +81,12 @@ public class UnitActionSystemUI : MonoBehaviour
     void OnAnyActionPoinsChanged_UpdateSystem(object sender, EventArgs e)
     {
         UpdateActionPoints();
+    }
+
+    void Unit_OnAnyUnitPickUpItems(object sender, EventArgs e)
+    {
+        CreateActionUIButtons();
+        UpdateSelectedVisual();
     }
 
     void UpdateSelectedVisual()
