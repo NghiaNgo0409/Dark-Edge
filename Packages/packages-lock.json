@@ -16,10 +16,12 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
-      "version": "2.8.6",
+      "version": "2.8.9",
       "depth": 0,
       "source": "registry",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.test-framework": "1.1.31"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
@@ -182,6 +184,15 @@
       "dependencies": {
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
+      }
+    },
+    "com.unity.visualeffectgraph": {
+      "version": "13.1.8",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.shadergraph": "13.1.8",
+        "com.unity.render-pipelines.core": "13.1.8"
       }
     },
     "com.unity.visualscripting": {
