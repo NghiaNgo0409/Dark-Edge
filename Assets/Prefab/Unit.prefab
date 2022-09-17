@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: -6162612327395806886}
   m_Layer: 7
   m_Name: Unit
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -474,6 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
+  hasGun: 0
+  hasMelee: 1
   bloodSplashVFXPrefab: {fileID: 9014965886396037408, guid: c7bbb91f22e065f4ca4f842afd2fed46,
     type: 3}
 --- !u!65 &6982879861831462573
@@ -561,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  ragdollRootBone: {fileID: 0}
 --- !u!114 &6631168188878528825
 MonoBehaviour:
   m_ObjectHideFlags: 0

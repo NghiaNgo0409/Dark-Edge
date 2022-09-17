@@ -10,6 +10,8 @@ public class DestructibleCrate : MonoBehaviour
     [SerializeField] Transform destructibleCratePrefab;
     [SerializeField] float explosionForce;
     [SerializeField] float explosionRange;
+    [SerializeField] int xNode;
+    [SerializeField] int zNode;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class DestructibleCrate : MonoBehaviour
     {
         Transform crateTransform = Instantiate(destructibleCratePrefab, transform.position, Quaternion.identity);
         ApplyExplosionToCrate(crateTransform, explosionForce, transform.position, explosionRange);
+        SetNodeBecomeWalkable(true);
         OnAnyCrateDestroyed?.Invoke(this, EventArgs.Empty);
         Destroy(gameObject);
     }
@@ -47,5 +50,10 @@ public class DestructibleCrate : MonoBehaviour
 
             ApplyExplosionToCrate(child, explosionForce, explosionPosition, explosionRange);
         }
+    }
+
+    void SetNodeBecomeWalkable(bool boolean)
+    {
+        Pathfinding.Instance.GetNode(xNode, zNode).SetIsWalkable(boolean);
     }
 }

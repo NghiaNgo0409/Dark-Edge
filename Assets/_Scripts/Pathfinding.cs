@@ -159,7 +159,7 @@ public class Pathfinding : MonoBehaviour
         return lowestFCostPathNode;
     }
 
-    PathNode GetNode(int x, int z)
+    public PathNode GetNode(int x, int z)
     {
         return gridSystem.GetGridObject(new GridPosition(x, z));
     }

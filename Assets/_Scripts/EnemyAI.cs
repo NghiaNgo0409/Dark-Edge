@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     }
     State state;
     float timer;
+    bool isAITurnOn;
     void Awake()
     {
         state = State.WaitingForEnemyTurn;
@@ -27,27 +28,37 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         if (TurnSystem.Instance.IsPlayerTurn()) return;
-
-        switch (state)
+        if (!isAITurnOn)
         {
-            case State.WaitingForEnemyTurn:
-                break;
-            case State.TakingTurn:
-                timer -= Time.deltaTime;
-                if (timer <= 0)
-                {
-                    if(TryTakeEnemyAIAction(SetStateTakingTurn))
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                TurnSystem.Instance.NextTurn();
+            }
+        }
+        else
+        {
+            switch (state)
+            {
+                case State.WaitingForEnemyTurn:
+                    break;
+                case State.TakingTurn:
+                    timer -= Time.deltaTime;
+                    if (timer <= 0)
                     {
-                        state = State.Busy;
+                        if (TryTakeEnemyAIAction(SetStateTakingTurn))
+                        {
+                            state = State.Busy;
+                        }
+                        else
+                        {
+                            TurnSystem.Instance.NextTurn();
+                        }
                     }
-                    else
-                    {
-                        TurnSystem.Instance.NextTurn();
-                    }
-                }
-                break;
-            case State.Busy:
-                break;
+                    break;
+                case State.Busy:
+                    break;
+            }
         }
     }
 
@@ -70,11 +81,11 @@ public class EnemyAI : MonoBehaviour
     {
         foreach (Unit enemy in UnitManager.Instance.GetEnemyUnitList())
         {
-            if(TryTakeEnemyAIAction(enemy, onActionCompleted))
+            if (TryTakeEnemyAIAction(enemy, onActionCompleted))
             {
                 return true;
             }
-            
+
         }
         return false;
     }
@@ -84,22 +95,22 @@ public class EnemyAI : MonoBehaviour
         EnemyAIAction bestEnemyAIAction = null;
         BaseAction bestBaseAction = null;
 
-        foreach(BaseAction baseAction in enemy.GetBaseActionArray())
+        foreach (BaseAction baseAction in enemy.GetBaseActionArray())
         {
-            if(!enemy.CanSpendActionPointsToTakeAction(baseAction))
+            if (!enemy.CanSpendActionPointsToTakeAction(baseAction))
             {
                 continue;
             }
 
-            if(bestEnemyAIAction == null)
+            if (bestEnemyAIAction == null)
             {
                 bestEnemyAIAction = baseAction.GetBestEnemyAIAction();
                 bestBaseAction = baseAction;
             }
             else
             {
-                EnemyAIAction testEnemyAIAction =  baseAction.GetBestEnemyAIAction();
-                if(testEnemyAIAction != null && testEnemyAIAction.actionValues > bestEnemyAIAction.actionValues)
+                EnemyAIAction testEnemyAIAction = baseAction.GetBestEnemyAIAction();
+                if (testEnemyAIAction != null && testEnemyAIAction.actionValues > bestEnemyAIAction.actionValues)
                 {
                     bestEnemyAIAction = testEnemyAIAction;
                     bestBaseAction = baseAction;
@@ -107,7 +118,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        if(bestEnemyAIAction != null && enemy.TrySpendActionPointsToTakeAction(bestBaseAction))
+        if (bestEnemyAIAction != null && enemy.TrySpendActionPointsToTakeAction(bestBaseAction))
         {
             bestBaseAction.TakeAction(bestEnemyAIAction.gridPosition, onActionCompleted);
             return true;
@@ -116,5 +127,11 @@ public class EnemyAI : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void SetIsAI(bool boolean)
+    {
+        isAITurnOn = boolean;
+        timer = 1f;
     }
 }
