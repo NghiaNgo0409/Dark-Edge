@@ -53,7 +53,7 @@ public class DestructibleCrate : MonoBehaviour
     }
 
     void SetNodeBecomeWalkable(bool boolean)
-    {
+    {  
         Pathfinding.Instance.GetNode(xNode, zNode).SetIsWalkable(boolean);
     }
 }

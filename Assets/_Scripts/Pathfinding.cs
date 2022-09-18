@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Pathfinding : MonoBehaviour
@@ -28,7 +30,7 @@ public class Pathfinding : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -53,21 +55,42 @@ public class Pathfinding : MonoBehaviour
                 GridPosition gridPosition = new GridPosition(x, z);
                 Vector3 worldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
                 float raycastOffset = 5f;
-                if(Physics.Raycast(worldPosition + Vector3.down * raycastOffset, Vector3.up * raycastOffset, raycastOffset, obstacleLayer))
+                RaycastHit hit;
+                if(Physics.Raycast(worldPosition + Vector3.down * raycastOffset, Vector3.up * raycastOffset, out hit, raycastOffset, obstacleLayer))
                 {
+                    GetNode(x, z).HitInfo = hit;
                     GetNode(x, z).SetIsWalkable(false);
                 }
             }
         }
     }
 
-    public List<GridPosition> FindPath(GridPosition startGridPosition, GridPosition endGridPosition, out int pathLength)
-    {
-        List<PathNode> openList = new List<PathNode>();
-        List<PathNode> closedList = new List<PathNode>();
 
-        PathNode startNode = gridSystem.GetGridObject(startGridPosition);
-        PathNode endNode = gridSystem.GetGridObject(endGridPosition);
+    List<PathNode> openList = new List<PathNode>(1000);
+    List<PathNode> closedList = new List<PathNode>(1000);
+    PathNode startNode;
+    PathNode endNode;
+    PathNode pathNode;
+    PathNode currentNode;
+    // Tuple<List<GridPosition>, int> findPathData;
+
+    public struct FindPathData
+    {
+        public List<GridPosition> GridPositions;
+        public int PathLength;
+    }
+
+    // public async Task<Tuple<List<GridPosition>, int>>
+    public async Task<FindPathData?> FindPath(GridPosition startGridPosition, GridPosition endGridPosition, int pathLength)
+    {
+        // List<PathNode> openList = new List<PathNode>();
+        // List<PathNode> closedList = new List<PathNode>();
+
+        openList.Clear();
+        closedList.Clear();
+
+        startNode = gridSystem.GetGridObject(startGridPosition);
+        endNode = gridSystem.GetGridObject(endGridPosition);
         openList.Add(startNode);
 
         for (int x = 0; x < gridSystem.GetWidth(); x++)
@@ -75,7 +98,7 @@ public class Pathfinding : MonoBehaviour
             for (int z = 0; z < gridSystem.GetHeight(); z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
-                PathNode pathNode = gridSystem.GetGridObject(gridPosition);
+                pathNode = gridSystem.GetGridObject(gridPosition);
 
                 pathNode.SetGCost(int.MaxValue);
                 pathNode.SetHCost(0);
@@ -90,13 +113,19 @@ public class Pathfinding : MonoBehaviour
 
         while (openList.Count > 0)
         {
-            PathNode currentNode = GetLowestFCostPathNode(openList);
+            currentNode = GetLowestFCostPathNode(openList);
 
             if (currentNode == endNode)
             {
                 //Reach final node
                 pathLength = endNode.GetFCost();
-                return CalculatePath(endNode);
+                // var completed = Task.WhenAll(CalculatePath(endNode)).IsCompleted;
+                var gridPositions = await CalculatePath(endNode);
+                FindPathData findPathData = new FindPathData {
+                    GridPositions = gridPositions,
+                    PathLength = pathLength
+                };
+                return findPathData;
             }
 
             openList.Remove(currentNode);
@@ -164,9 +193,11 @@ public class Pathfinding : MonoBehaviour
         return gridSystem.GetGridObject(new GridPosition(x, z));
     }
 
+    List<PathNode> neighbourNodeList = new List<PathNode>();
     List<PathNode> GetNeighbourList(PathNode currentNode)
     {
-        List<PathNode> neighbourNodeList = new List<PathNode>();
+        // neighbourNodeList = new List<PathNode>();
+        neighbourNodeList.Clear();
 
         GridPosition gridPosition = currentNode.GetGridPosition();
 
@@ -213,9 +244,12 @@ public class Pathfinding : MonoBehaviour
         return neighbourNodeList;
     }
 
-    List<GridPosition> CalculatePath(PathNode endNode)
+    List<PathNode> pathNodeList = new List<PathNode>();
+    List<GridPosition> gridPositionList = new List<GridPosition>();
+    async Task <List<GridPosition>> CalculatePath(PathNode endNode)
     {
-        List<PathNode> pathNodeList = new List<PathNode>();
+        // List<PathNode> pathNodeList = new List<PathNode>();
+        pathNodeList.Clear();
         pathNodeList.Add(endNode);
 
         PathNode currentNode = endNode;
@@ -225,13 +259,14 @@ public class Pathfinding : MonoBehaviour
             currentNode = currentNode.GetCameFromPathNode();
         }
         pathNodeList.Reverse();
-        List<GridPosition> gridPositionList = new List<GridPosition>();
+        // List<GridPosition> gridPositionList = new List<GridPosition>();
+        gridPositionList.Clear();
         foreach(PathNode pathNode in pathNodeList)
         {
             gridPositionList.Add(pathNode.GetGridPosition());
         }
 
-        return gridPositionList;
+        return await Task.FromResult(gridPositionList);
     }
 
     public void SetIsWalkableGridPosition(GridPosition gridPosition, bool isWalkable)
@@ -246,12 +281,17 @@ public class Pathfinding : MonoBehaviour
 
     public bool HasPath(GridPosition startGridPosition, GridPosition endGridPosition)
     {
-        return FindPath(startGridPosition, endGridPosition, out int pathLength) != null;
+        int pathLength = 0;
+        var findPathTask = Task.WhenAny(FindPath(startGridPosition, endGridPosition, pathLength));
+        // FindPath(startGridPosition, endGridPosition, out int pathLength);
+        return findPathTask.Result.Result != null;
     }
 
     public int GetPathLength(GridPosition startGridPosition, GridPosition endGridPosition)
     {
-        FindPath(startGridPosition, endGridPosition, out int pathLength);
-        return pathLength;
+        int pathLength = 0;
+        var findPathTask = Task.WhenAny(FindPath(startGridPosition, endGridPosition, pathLength));
+        // FindPath(startGridPosition, endGridPosition, out int pathLength);
+        return findPathTask.Result.Result.Value.PathLength;
     }
 }

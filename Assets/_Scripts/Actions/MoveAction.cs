@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MoveAction : BaseAction
@@ -12,7 +13,7 @@ public class MoveAction : BaseAction
     int currentPositionIndex;
     float stoppingDistance = .1f;
     float rotateSpeed = 10f;
-    [SerializeField] int maxMoveDistance;
+    static int maxMoveDistance = 7;
 
     public Action onMoveCompleted;
     protected override void Awake() 
@@ -49,9 +50,11 @@ public class MoveAction : BaseAction
         }
     }
 
+    List<GridPosition> validGridPositionList = new List<GridPosition>(8);
     public override List<GridPosition> GetValidActionGridPosition()
     {
-        List<GridPosition> validGridPositionList = new List<GridPosition>();
+        // List<GridPosition> validGridPositionList = new List<GridPosition>();
+        validGridPositionList.Clear();
         GridPosition unitGridPosition = unit.GetGridPosition();
 
         for(int x = -maxMoveDistance; x <= maxMoveDistance; x++)
@@ -98,9 +101,13 @@ public class MoveAction : BaseAction
         return validGridPositionList;
     }
 
+    List<GridPosition> pathGridPositionList = new List<GridPosition>(1000);
     public override void TakeAction(GridPosition gridPosition, Action onMoveCompleted)
     {
-        List<GridPosition> pathGridPositionList = Pathfinding.Instance.FindPath(unit.GetGridPosition(), gridPosition, out int pathLength);
+        // List<GridPosition> pathGridPositionList = Pathfinding.Instance.FindPath(unit.GetGridPosition(), gridPosition, out int pathLength);
+        int pathLength = 0;
+        var findPathTask = Task.WhenAny(Pathfinding.Instance.FindPath(unit.GetGridPosition(), gridPosition, pathLength));
+        pathGridPositionList = findPathTask.Result.Result.Value.GridPositions;
         currentPositionIndex = 0;
         positionList = new List<Vector3>();
 
@@ -127,5 +134,10 @@ public class MoveAction : BaseAction
             actionValues = targetCountAtGridPosition * 10,
             actionName = "Move Action"
         };
+    }
+
+    public static int GetMaxMoveDistance()
+    {
+        return maxMoveDistance;
     }
 }

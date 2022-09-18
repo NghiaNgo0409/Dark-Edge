@@ -11,6 +11,8 @@ public class PathNode
     bool isWalkable = true;
     PathNode cameFromPathNode;
 
+    public RaycastHit? HitInfo {get; set;}
+
     public PathNode(GridPosition gridPosition)
     {
         this.gridPosition = gridPosition;
