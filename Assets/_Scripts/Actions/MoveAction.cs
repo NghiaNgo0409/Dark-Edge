@@ -13,7 +13,7 @@ public class MoveAction : BaseAction
     int currentPositionIndex;
     float stoppingDistance = .1f;
     float rotateSpeed = 10f;
-    static int maxMoveDistance = 7;
+    [SerializeField]int maxMoveDistance;
 
     public Action onMoveCompleted;
     protected override void Awake() 
@@ -134,10 +134,5 @@ public class MoveAction : BaseAction
             actionValues = targetCountAtGridPosition * 10,
             actionName = "Move Action"
         };
-    }
-
-    public static int GetMaxMoveDistance()
-    {
-        return maxMoveDistance;
     }
 }

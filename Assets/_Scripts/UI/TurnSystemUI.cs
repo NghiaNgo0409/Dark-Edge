@@ -18,6 +18,8 @@ public class TurnSystemUI : MonoBehaviour
         UpdateEndTurnButton();
 
         TurnSystem.Instance.OnTurnChanged += OnTurnChanged_UpdateTurnSystemUI;
+        PauseSystemUI.Instance.OnPauseSystemTurnOn += PauseSystemUI_OnPauseSystemTurnOn;
+        PauseSystemUI.Instance.OnPauseSystemTurnOff += PauseSystemUI_OnPauseSystemTurnOff;
     }
 
     void OnTurnChanged_UpdateTurnSystemUI(object sender, EventArgs e)
@@ -25,6 +27,16 @@ public class TurnSystemUI : MonoBehaviour
         UpdateTurnNumber();
         UpdateEndTurnButton();
         UpdateEnemyTurnUI();
+    }
+
+    void PauseSystemUI_OnPauseSystemTurnOn(object sender, EventArgs e) 
+    {
+        endTurnBtn.GetComponent<Button>().interactable = false;
+    }
+
+    void PauseSystemUI_OnPauseSystemTurnOff(object sender, EventArgs e) 
+    {
+        endTurnBtn.GetComponent<Button>().interactable = true;
     }
 
     // Update is called once per frame
