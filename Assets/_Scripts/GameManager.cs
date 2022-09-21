@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject loadingCanvas;
+    [SerializeField] Slider loadingSlider;
+    [SerializeField] TextMeshProUGUI loadingText; 
     void Awake() 
     {
         DontDestroyOnLoad(gameObject);
@@ -23,6 +28,22 @@ public class GameManager : MonoBehaviour
 
     public void LoadToScene(int index) 
     {
-        SceneManager.LoadScene(index);
+        StartCoroutine(LoadSceneAsync(index));
+    }
+
+    IEnumerator LoadSceneAsync(int index)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(index);
+
+        loadingCanvas.SetActive(true);
+
+        while(!operation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingSlider.value = progressValue;
+            loadingText.text = "LOADING SCENES..." + progressValue * 100f + "%";
+
+            yield return null;
+        }
     }
 }
