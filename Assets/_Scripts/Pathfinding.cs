@@ -45,7 +45,12 @@ public class Pathfinding : MonoBehaviour
         this.height = height;
         this.cellSize = cellSize;
 
-        gridSystem = new GridSystem<PathNode>(width, height, cellSize, (GridSystem<PathNode> g, GridPosition gridPosition) => new PathNode(gridPosition));
+        gridSystem = new GridSystem<PathNode>(width, height, cellSize, (GridSystem<PathNode> g, GridPosition gridPosition) => 
+        {
+            var pathNode = new PathNode();
+            pathNode.InitPathNode(gridPosition);
+            return pathNode;
+        });
         gridSystem.CreateGridObject(gridPrefab);
 
         for(int x = 0; x < width; x++)
@@ -58,7 +63,8 @@ public class Pathfinding : MonoBehaviour
                 RaycastHit hit;
                 if(Physics.Raycast(worldPosition + Vector3.down * raycastOffset, Vector3.up * raycastOffset, out hit, raycastOffset, obstacleLayer))
                 {
-                    GetNode(x, z).HitInfo = hit;
+                    // GetNode(x, z).HitInfo = hit;
+                    GetNode(x, z).SetHitInfo(hit);
                     GetNode(x, z).SetIsWalkable(false);
                 }
             }
@@ -98,12 +104,13 @@ public class Pathfinding : MonoBehaviour
             for (int z = 0; z < gridSystem.GetHeight(); z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
-                pathNode = gridSystem.GetGridObject(gridPosition);
+                pathNode = GetNode(x, z);
 
                 pathNode.SetGCost(int.MaxValue);
                 pathNode.SetHCost(0);
                 pathNode.CalculateFCost();
-                pathNode.ResetCameFromPathNode();
+                // pathNode.ResetCameFromPathNode();
+                pathNode.ResetCameFromGrid();
             }
         }
 
@@ -115,7 +122,7 @@ public class Pathfinding : MonoBehaviour
         {
             currentNode = GetLowestFCostPathNode(openList);
 
-            if (currentNode == endNode)
+            if (currentNode.GetGridPosition() == endNode.GetGridPosition())
             {
                 //Reach final node
                 pathLength = endNode.GetFCost();
@@ -148,7 +155,8 @@ public class Pathfinding : MonoBehaviour
 
                 if(tentativeGCost < neighbourNode.GetGCost())
                 {
-                    neighbourNode.SetCameFromPathNode(currentNode);
+                    // neighbourNode.SetCameFromPathNode(currentNode);
+                    neighbourNode.SetCameFromGrid(currentNode.GetGridPosition());
                     neighbourNode.SetGCost(tentativeGCost);
                     neighbourNode.SetHCost(CalculateDistance(neighbourNode.GetGridPosition(), endGridPosition));
                     neighbourNode.CalculateFCost();
@@ -244,28 +252,38 @@ public class Pathfinding : MonoBehaviour
         return neighbourNodeList;
     }
 
-    List<PathNode> pathNodeList = new List<PathNode>();
     List<GridPosition> gridPositionList = new List<GridPosition>();
     async Task <List<GridPosition>> CalculatePath(PathNode endNode)
     {
         // List<PathNode> pathNodeList = new List<PathNode>();
-        pathNodeList.Clear();
-        pathNodeList.Add(endNode);
+        gridPositionList.Clear();
+        gridPositionList.Add(endNode.GetGridPosition());
 
-        PathNode currentNode = endNode;
-        while(currentNode.GetCameFromPathNode() != null)
+        //
+        // PathNode currentNode = endNode;
+        // while(currentNode.GetCameFromPathNode() != null)
+        // {
+        //     pathNodeList.Add(currentNode.GetCameFromPathNode());
+        //     currentNode = currentNode.GetCameFromPathNode();
+        // }
+        // pathNodeList.Reverse();
+        // // List<GridPosition> gridPositionList = new List<GridPosition>();
+        // gridPositionList.Clear();
+        // foreach(PathNode pathNode in pathNodeList)
+        // {
+        //     gridPositionList.Add(pathNode.GetGridPosition());
+        // }
+
+        //
+         PathNode currentNode = endNode;
+        while(currentNode.GetCameFromGrid() != null)
         {
-            pathNodeList.Add(currentNode.GetCameFromPathNode());
-            currentNode = currentNode.GetCameFromPathNode();
+            gridPositionList.Add(currentNode.GetCameFromGrid().Value);
+            currentNode = gridSystem.GetGridObject(currentNode.GetCameFromGrid().Value);
         }
-        pathNodeList.Reverse();
+        gridPositionList.Reverse();
         // List<GridPosition> gridPositionList = new List<GridPosition>();
         gridPositionList.Clear();
-        foreach(PathNode pathNode in pathNodeList)
-        {
-            gridPositionList.Add(pathNode.GetGridPosition());
-        }
-
         return await Task.FromResult(gridPositionList);
     }
 

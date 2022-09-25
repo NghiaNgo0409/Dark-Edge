@@ -2,20 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathNode
+// public struct PathNodeData
+// {
+//     GridPosition gridPosition;
+//     int gCost;
+//     int hCost;
+//     int fCost;
+//     bool isWalkable;
+// }
+
+public struct PathNode
 {
     GridPosition gridPosition;
     int gCost;
     int hCost;
     int fCost;
-    bool isWalkable = true;
-    PathNode cameFromPathNode;
+    bool isWalkable;
+    // PathNode cameFromPathNode;
+
+    GridPosition? camFromGrid;
 
     public RaycastHit? HitInfo {get; set;}
 
-    public PathNode(GridPosition gridPosition)
+    public void InitPathNode(GridPosition gridPosition)
     {
         this.gridPosition = gridPosition;
+        isWalkable = true;
+        camFromGrid = null;
+    }
+
+    public void SetHitInfo(RaycastHit info)
+    {
+        HitInfo = info;
     }
 
     public override string ToString()
@@ -68,18 +86,33 @@ public class PathNode
         this.isWalkable = isWalkable;
     }
 
-    public void ResetCameFromPathNode()
+    // public void ResetCameFromPathNode()
+    // {
+    //     cameFromPathNode = null;
+    // }
+
+    // public void SetCameFromPathNode(PathNode currentNode)
+    // {
+    //     cameFromPathNode = currentNode;
+    // }
+
+    // public PathNode GetCameFromPathNode()
+    // {
+    //     return cameFromPathNode;
+    // }
+
+    public void ResetCameFromGrid()
     {
-        cameFromPathNode = null;
+        camFromGrid = null;
     }
 
-    public void SetCameFromPathNode(PathNode currentNode)
+    public void SetCameFromGrid(GridPosition gridPos)
     {
-        cameFromPathNode = currentNode;
+        camFromGrid = gridPos;
     }
 
-    public PathNode GetCameFromPathNode()
+    public GridPosition? GetCameFromGrid()
     {
-        return cameFromPathNode;
+        return camFromGrid;
     }
 }
