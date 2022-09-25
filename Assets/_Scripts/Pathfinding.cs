@@ -111,12 +111,29 @@ public class Pathfinding : MonoBehaviour
                 pathNode.CalculateFCost();
                 // pathNode.ResetCameFromPathNode();
                 pathNode.ResetCameFromGrid();
+
+                gridSystem.gridObjectArray[x, z] = pathNode;
             }
         }
 
         startNode.SetGCost(0);
         startNode.SetHCost(CalculateDistance(startGridPosition, endGridPosition));
         startNode.CalculateFCost();
+
+        // Update start node in open list.
+        for (int i = 0; i < openList.Count; i++)
+        {
+            PathNode node = openList[i];
+            if (node.GetGridPosition() == startNode.GetGridPosition())
+            {
+                node.SetGCost(startNode.GetGCost());
+                node.SetHCost(startNode.GetHCost());
+                node.CalculateFCost();
+
+                openList[i] = node;
+                break;
+            }
+        }
 
         while (openList.Count > 0)
         {

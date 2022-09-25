@@ -9,7 +9,7 @@ public class GridSystem<TGridObject>
     int height;
     float cellSize;
 
-    TGridObject[,] gridObjectArray;
+    public TGridObject[,] gridObjectArray;
 
     public GridSystem(int width, int height, float cellSize, Func<GridSystem<TGridObject>, GridPosition, TGridObject> createGridObject)
     {
