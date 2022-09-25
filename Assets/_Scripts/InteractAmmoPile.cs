@@ -45,7 +45,7 @@ public class InteractAmmoPile : MonoBehaviour, IInteractable
         {
             foreach(GameObject item in itemContainer)
             {
-                Instantiate(item, transform.position + Vector3.right * 1.5f, Quaternion.identity);
+                Instantiate(item, transform.position + Vector3.up * 1.5f, Quaternion.identity);
             }
             isOpen = true;
         }
