@@ -7,11 +7,22 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance {get; private set;}
     [SerializeField] GameObject loadingCanvas;
     [SerializeField] Slider loadingSlider;
     [SerializeField] TextMeshProUGUI loadingText; 
+    [SerializeField] GameObject winCanvas;
+    bool isWin;
     void Awake() 
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
     // Start is called before the first frame update
@@ -45,5 +56,16 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public bool GetIsWin()
+    {
+        return isWin;
+    }
+
+    public void ShowWinCanvas()
+    {
+        isWin = true;
+        winCanvas.SetActive(true);
     }
 }

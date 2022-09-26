@@ -27,7 +27,9 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TurnSystem.Instance.IsPlayerTurn()) return;
+        if(TurnSystem.Instance.IsPlayerTurn()) return;
+        if(PauseSystemUI.Instance.GetIsPause()) return;
+        if(GameManager.Instance.GetIsWin()) return;
         if (!isAITurnOn)
         {
             timer -= Time.deltaTime;

@@ -9,6 +9,7 @@ public class InteractWeapon : MonoBehaviour, IInteractable
     {
         Gun,
         Melee,
+        Pill
     }
 
     GridPosition gridPosition;
@@ -53,6 +54,9 @@ public class InteractWeapon : MonoBehaviour, IInteractable
             case WeaponType.Melee:
                 selectingUnit.SetMelee(true);
                 selectingUnit.GetComponent<SwordAction>().enabled = true;
+                break;
+            case WeaponType.Pill:
+                GameManager.Instance.ShowWinCanvas();
                 break;
             default:
                 break;
