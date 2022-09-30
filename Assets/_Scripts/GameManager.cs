@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
     // Start is called before the first frame update
     void Start()
@@ -40,6 +39,11 @@ public class GameManager : MonoBehaviour
     public void LoadToScene(int index) 
     {
         StartCoroutine(LoadSceneAsync(index));
+    }
+
+    public void ReloadScene()
+    {
+        StartCoroutine(LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
     }
 
     IEnumerator LoadSceneAsync(int index)

@@ -26,7 +26,8 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        if (PauseSystemUI.Instance.GetIsPause()) return;
         HandleMovement();
         HandleRotation();
         HandleZoom();
