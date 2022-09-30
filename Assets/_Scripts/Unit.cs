@@ -20,7 +20,7 @@ public class Unit : MonoBehaviour
     [SerializeField] bool isEnemy;
     [SerializeField] bool hasGun;
     [SerializeField] bool hasMelee = true;
-    
+   
     [SerializeField] Transform bloodSplashVFXPrefab;
     void Awake()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider loadingSlider;
     [SerializeField] TextMeshProUGUI loadingText; 
     [SerializeField] GameObject winCanvas;
+    [SerializeField] GameObject loseCanvas;
     bool isWin;
+    bool isLose;
     void Awake() 
     {
         if(Instance == null)
@@ -67,9 +70,20 @@ public class GameManager : MonoBehaviour
         return isWin;
     }
 
+    public bool GetIsLose()
+    {
+        return isLose;
+    }
+
     public void ShowWinCanvas()
     {
         isWin = true;
         winCanvas.SetActive(true);
+    }
+
+    public void ShowLoseCanvas()
+    {
+        isLose = true;
+        loseCanvas.SetActive(true);
     }
 }

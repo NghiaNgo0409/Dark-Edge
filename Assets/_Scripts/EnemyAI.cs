@@ -30,6 +30,7 @@ public class EnemyAI : MonoBehaviour
         if(TurnSystem.Instance.IsPlayerTurn()) return;
         if(PauseSystemUI.Instance.GetIsPause()) return;
         if(GameManager.Instance.GetIsWin()) return;
+        if (GameManager.Instance.GetIsLose()) return;
         if (!isAITurnOn)
         {
             timer -= Time.deltaTime;

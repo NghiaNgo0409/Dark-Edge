@@ -28,6 +28,8 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         if (PauseSystemUI.Instance.GetIsPause()) return;
+        if (GameManager.Instance.GetIsLose()) return;
+        if (GameManager.Instance.GetIsWin()) return;
         HandleMovement();
         HandleRotation();
         HandleZoom();
@@ -54,8 +56,12 @@ public class CameraController : MonoBehaviour
         }
 
         Vector3 moveDirection = transform.forward * desiredPosition.z + transform.right * desiredPosition.x;
-        
-        transform.position += moveDirection * cameraSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + moveDirection * cameraSpeed * Time.deltaTime;
+
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, 65);
+        newPosition.z = Mathf.Clamp(newPosition.z, 0, 85);
+
+        transform.position = newPosition;
     }
 
     void HandleRotation()

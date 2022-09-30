@@ -77,6 +77,7 @@ public class UnitManager : MonoBehaviour
 
         if(!unit.IsEnemy())
         {
+            GameManager.Instance.ShowLoseCanvas();
             friendlyUnitList.Remove(unit);
         }
     }
