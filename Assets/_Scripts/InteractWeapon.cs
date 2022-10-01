@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InteractWeapon : MonoBehaviour, IInteractable
 {
+    public static event EventHandler OnAnySpawnItem;
     enum WeaponType
     {
         Gun,
@@ -23,6 +24,7 @@ public class InteractWeapon : MonoBehaviour, IInteractable
     {
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.SetInteractableObjectAtGridPosition(gridPosition, this);
+        OnAnySpawnItem?.Invoke(this, EventArgs.Empty);
     }
 
     // Update is called once per frame

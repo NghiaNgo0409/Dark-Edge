@@ -55,6 +55,7 @@ public class GridSystemVisual : MonoBehaviour
 
         UnitActionSystem.Instance.OnSelectedActionChange += UnitActionSystem_OnSelectedActionChange; 
         LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
+        InteractWeapon.OnAnySpawnItem += InteractWeapon_OnAnySpawnItem;
     }
 
     // Update is called once per frame
@@ -174,6 +175,11 @@ public class GridSystemVisual : MonoBehaviour
     }
 
     void LevelGrid_OnAnyUnitMovedGridPosition(object sender, EventArgs e)
+    {
+        UpdateVisualGrid();
+    }
+
+    void InteractWeapon_OnAnySpawnItem(object sender, EventArgs e)
     {
         UpdateVisualGrid();
     }
