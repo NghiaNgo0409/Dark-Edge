@@ -16200,7 +16200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221816920}
-  m_LocalRotation: {x: 0.3006394, y: -0.000000016410377, z: 0.000000005172915, w: 0.9537379}
+  m_LocalRotation: {x: 0.3006394, y: 0.000000016410377, z: -0.000000005172915, w: 0.9537379}
   m_LocalPosition: {x: 0, y: 7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18478,7 +18478,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.3006394, y: -0.000000016410377, z: 0.000000005172915, w: 0.9537379}
+  m_LocalRotation: {x: 0.3006394, y: 0.000000016410377, z: -0.000000005172915, w: 0.9537379}
   m_LocalPosition: {x: 0, y: 7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21978,6 +21978,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8743846550525292139, guid: ee1f96a0cf0fd4d11b56f774c26e0d3e,
         type: 3}
+      propertyPath: m_text
+      value: Try Again ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743846550525292139, guid: ee1f96a0cf0fd4d11b56f774c26e0d3e,
+        type: 3}
       propertyPath: m_textAlignment
       value: 65535
       objectReference: {fileID: 0}
@@ -22130,6 +22135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8743846550822780902, guid: ee1f96a0cf0fd4d11b56f774c26e0d3e,
+        type: 3}
+      propertyPath: m_text
+      value: Try Again
       objectReference: {fileID: 0}
     - target: {fileID: 8743846550822780902, guid: ee1f96a0cf0fd4d11b56f774c26e0d3e,
         type: 3}
