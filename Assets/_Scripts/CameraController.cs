@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] float cameraSpeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float zoomAmount;
+    [SerializeField] float maxXPos;
+    [SerializeField] float maxZPos;
 
     [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
     CinemachineTransposer cinemachineTransposer;
@@ -58,8 +60,8 @@ public class CameraController : MonoBehaviour
         Vector3 moveDirection = transform.forward * desiredPosition.z + transform.right * desiredPosition.x;
         Vector3 newPosition = transform.position + moveDirection * cameraSpeed * Time.deltaTime;
 
-        newPosition.x = Mathf.Clamp(newPosition.x, 0, 65);
-        newPosition.z = Mathf.Clamp(newPosition.z, 0, 85);
+        newPosition.x = Mathf.Clamp(newPosition.x, 0, maxXPos);
+        newPosition.z = Mathf.Clamp(newPosition.z, 0, maxZPos);
 
         transform.position = newPosition;
     }

@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.autodesk.fbx": {
+      "version": "4.1.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -38,6 +45,40 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.feature.cinematic": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.timeline": "1.7.1",
+        "com.unity.sequences": "1.1.0",
+        "com.unity.formats.fbx": "4.1.2",
+        "com.unity.formats.alembic": "2.3.0",
+        "com.unity.cinemachine": "2.8.6",
+        "com.unity.recorder": "3.0.3"
+      }
+    },
+    "com.unity.formats.alembic": {
+      "version": "2.3.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0",
+        "com.unity.modules.unityanalytics": "1.0.0",
+        "com.unity.modules.cloth": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.formats.fbx": {
+      "version": "4.1.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.5.2",
+        "com.autodesk.fbx": "4.1.1"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
@@ -90,6 +131,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.recorder": {
+      "version": "3.0.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.render-pipelines.core": {
       "version": "13.1.8",
       "depth": 1,
@@ -116,6 +166,18 @@
       "depth": 2,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.sequences": {
+      "version": "1.1.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.5.2",
+        "com.unity.recorder": "2.5.5",
+        "com.unity.settings-manager": "1.0.3",
+        "com.unity.ugui": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
