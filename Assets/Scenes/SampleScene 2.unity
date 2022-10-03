@@ -15,10 +15,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.46453363, g: 0.5511632, b: 0.6886792, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.5319509, g: 0.7115458, b: 0.8113208, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.05
+  m_FogDensity: 0.04
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -5130,8 +5130,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221816920}
-  m_LocalRotation: {x: 0.30082017, y: 0.000000016121964, z: -0.000000005085361, w: 0.95368093}
-  m_LocalPosition: {x: 0, y: 2.48, z: -3.54}
+  m_LocalRotation: {x: 0.30082017, y: -0.000000016409393, z: 0.0000000051760254, w: 0.95368093}
+  m_LocalPosition: {x: 0, y: 4.48, z: -2.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7913,8 +7913,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.30082017, y: 0.000000016121964, z: -0.000000005085361, w: 0.95368093}
-  m_LocalPosition: {x: 0, y: 2.48, z: -3.54}
+  m_LocalRotation: {x: 0.30082017, y: -0.000000016409393, z: 0.0000000051760254, w: 0.95368093}
+  m_LocalPosition: {x: 0, y: 4.48, z: -2.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8471,7 +8471,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352316502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8494,8 +8494,10 @@ MonoBehaviour:
   rotationSpeed: 100
   zoomAmount: 2
   maxXPos: 65
-  maxZPos: 85
+  maxZPos: 95
   cinemachineVirtualCamera: {fileID: 221816921}
+  MIN_ZOOM_AMOUNT: 1
+  MAX_ZOOM_AMOUNT: 30
 --- !u!1 &353327197
 GameObject:
   m_ObjectHideFlags: 0
@@ -33907,7 +33909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598769540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.318397, y: 7.9800053, z: -40.51715}
+  m_LocalPosition: {x: -12.41, y: 7.9800053, z: -42.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
