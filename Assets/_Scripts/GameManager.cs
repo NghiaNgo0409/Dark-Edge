@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class GameManager : MonoBehaviour
 {
@@ -85,5 +86,23 @@ public class GameManager : MonoBehaviour
     {
         isLose = true;
         loseCanvas.SetActive(true);
+    }
+
+    public void SetMap(int index)
+    {
+        int level = index - 2;
+        PlayerPrefs.SetInt("WinMap" + level, 1);
+    }
+
+    public int GetMap(int index)
+    {
+        int level = index - 2;
+        return PlayerPrefs.GetInt("WinMap" + level);
+    }
+
+    [ContextMenu("TestSetMap")]
+    public void TestSetMap()
+    {
+        PlayerPrefs.SetInt("WinMap0", 1);
     }
 }
