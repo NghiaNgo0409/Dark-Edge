@@ -17,8 +17,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
     CinemachineTransposer cinemachineTransposer;
 
-    const float MIN_ZOOM_AMOUNT = 2f;
-    const float MAX_ZOOM_AMOUNT = 30f; 
+    [SerializeField] float MIN_ZOOM_AMOUNT = 2f;
+    [SerializeField] float MAX_ZOOM_AMOUNT = 30f; 
     // Start is called before the first frame update
     void Start()
     {
