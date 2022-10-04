@@ -244,13 +244,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2445508724000326146}
   - component: {fileID: 2445508724000326398}
-  - component: {fileID: 2445508724000326145}
-  - component: {fileID: 2445508724000326144}
+  - component: {fileID: 7315545256714474601}
   - component: {fileID: 7822639835316145641}
   - component: {fileID: 1682859859855255727}
   - component: {fileID: 5392289529423423632}
   - component: {fileID: 1073426452507755710}
-  - component: {fileID: 5373352557243833408}
   - component: {fileID: 1430033105554744357}
   m_Layer: 0
   m_Name: Enemy
@@ -275,7 +273,7 @@ Transform:
   - {fileID: 2445508723576163293}
   - {fileID: 3550494683705200860}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2445508724000326398
 MonoBehaviour:
@@ -292,7 +290,7 @@ MonoBehaviour:
   isEnemy: 1
   bloodSplashVFXPrefab: {fileID: 9014965886396037408, guid: c7bbb91f22e065f4ca4f842afd2fed46,
     type: 3}
---- !u!114 &2445508724000326145
+--- !u!114 &7315545256714474601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,22 +299,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2445508724000326149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c8a2cba337b24e4ba1725e9294bf47d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5780b455664019c47bc9d26168dfbbb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveDistance: 4
---- !u!114 &2445508724000326144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2445508724000326149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6e8436cc615404d8caaf6695c83f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7822639835316145641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,20 +362,6 @@ MonoBehaviour:
   ragdollPrefab: {fileID: 2445508724000326146, guid: 4bf17e300033b0a41b14ffc56e72cece,
     type: 3}
   originalRootBone: {fileID: 2445508724165521760}
---- !u!114 &5373352557243833408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2445508724000326149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02b01c8ab7fa512449125fc0ced6a6c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSwordDistance: 1
-  rotateSpeed: 7
 --- !u!114 &1430033105554744357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db7ea2afb92ba94c8757ca7881006a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShootDistance: 1
+  maxShootDistance: 7
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256

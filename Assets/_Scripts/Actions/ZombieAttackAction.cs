@@ -90,9 +90,10 @@ public class ZombieAttackAction : BaseAction
         };
     }
 
+    List<GridPosition> validGridPositionList = new List<GridPosition>();
     public override List<GridPosition> GetValidActionGridPosition()
     {
-        List<GridPosition> validGridPositionList = new List<GridPosition>();
+        validGridPositionList.Clear();
         GridPosition unitGridPosition = unit.GetGridPosition();
 
         for (int x = -maxZombieAttackDistance; x <= maxZombieAttackDistance; x++)
@@ -124,10 +125,10 @@ public class ZombieAttackAction : BaseAction
         return validGridPositionList;
     }
 
+
     public List<GridPosition> GetValidTarget(GridPosition gridPosition)
     {
-        List<GridPosition> validGridPositionList = new List<GridPosition>();
-
+        validGridPositionList.Clear();
         for (int x = -5; x <= 5; x++)
         {
             for (int z = -5; z <= 5; z++)

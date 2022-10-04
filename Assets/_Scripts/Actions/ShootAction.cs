@@ -122,11 +122,11 @@ public class ShootAction : BaseAction
         return GetValidActionGridPosition(unitGridPosition);
     }
 
+    List<GridPosition> validGridPositionList = new List<GridPosition>();
     public List<GridPosition> GetValidActionGridPosition(GridPosition unitGridPosition)
     {
-        List<GridPosition> validGridPositionList = new List<GridPosition>();
-
-        for(int x = -maxShootDistance; x <= maxShootDistance; x++)
+        validGridPositionList.Clear();
+        for (int x = -maxShootDistance; x <= maxShootDistance; x++)
         {
             for (int z = -maxShootDistance; z <= maxShootDistance; z++)
             {

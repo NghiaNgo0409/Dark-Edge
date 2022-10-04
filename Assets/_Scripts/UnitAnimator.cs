@@ -22,7 +22,13 @@ public class UnitAnimator : MonoBehaviour
             moveAction.OnStopMoving += MoveAction_OnStopMoving;
         }
 
-        if(TryGetComponent<ShootAction>(out ShootAction shootAction))
+        if (TryGetComponent<MoveGunAction>(out MoveGunAction moveGunAction))
+        {
+            moveGunAction.OnStartMoving += MoveAction_OnStartMoving;
+            moveGunAction.OnStopMoving += MoveAction_OnStopMoving;
+        }
+
+        if (TryGetComponent<ShootAction>(out ShootAction shootAction))
         {
             shootAction.OnShooting += ShootAction_OnShooting;
         }
@@ -41,7 +47,7 @@ public class UnitAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RemoveWeapon();
+        if(!unit.IsEnemy()) RemoveWeapon();
         if (unit.DoesHasGun() && !unit.IsEnemy()) EquipRifle();
         if (unit.DoesHasMelee() && !unit.IsEnemy()) EquipSword();
     }
