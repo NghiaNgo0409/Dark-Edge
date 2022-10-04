@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    const int ACTION_MAX_POINTS = 100;
+    //const int ACTION_MAX_POINTS = 100;
 
     public static event EventHandler OnAnyActionPointsChanged;
     public static event EventHandler OnAnyUnitSpawned;
@@ -15,17 +15,18 @@ public class Unit : MonoBehaviour
     GridPosition gridPosition;
     HealthSystem healthSystem; 
     BaseAction[] baseActionArray;
-    int actionPoints = ACTION_MAX_POINTS;
+    int actionPoints;
 
     [SerializeField] bool isEnemy;
-    [SerializeField] bool hasGun;
-    [SerializeField] bool hasMelee = true;
+    [SerializeField] static bool hasGun;
+    [SerializeField] static bool hasMelee = true;
    
     [SerializeField] Transform bloodSplashVFXPrefab;
     void Awake()
     {
         healthSystem = GetComponent<HealthSystem>();
         baseActionArray = GetComponents<BaseAction>();
+        SetActionPoints();
     }
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,18 @@ public class Unit : MonoBehaviour
             gridPosition = newGridPosition;
 
             LevelGrid.Instance.UnitMovedGridPosition(this, oldGridPosition, newGridPosition);
+        }
+    }
+
+    void SetActionPoints()
+    {
+        if (isEnemy)
+        {
+            actionPoints = 2;
+        }
+        else
+        {
+            actionPoints = 4;
         }
     }
 
@@ -147,7 +160,7 @@ public class Unit : MonoBehaviour
     {
         if((IsEnemy() && !TurnSystem.Instance.IsPlayerTurn()) || (!IsEnemy() && TurnSystem.Instance.IsPlayerTurn()))
         {
-            actionPoints = ACTION_MAX_POINTS;
+            SetActionPoints();
 
             OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
         }

@@ -40,7 +40,7 @@ public class InteractAmbulance : MonoBehaviour, IInteractable
         timer = 1f;
         foreach (GameObject item in itemContainer)
         {
-            Instantiate(item, transform.position + Vector3.left * 3f, Quaternion.identity);
+            Instantiate(item, transform.position + Vector3.left * 5f, Quaternion.identity);
         }
     }
 }

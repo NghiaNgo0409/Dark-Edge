@@ -6,6 +6,7 @@ using UnityEngine;
 public class UnitAnimator : MonoBehaviour
 {
     Animator animator;
+    Unit unit;
     [SerializeField] Transform bulletProjectilePrefab;
     [SerializeField] Transform shootingPoint;
     [SerializeField] Transform swordTransform;
@@ -13,6 +14,7 @@ public class UnitAnimator : MonoBehaviour
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        unit = GetComponent<Unit>();
 
         if(TryGetComponent<MoveAction>(out MoveAction moveAction))
         {
@@ -39,7 +41,9 @@ public class UnitAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EquipRifle();
+        RemoveWeapon();
+        if (unit.DoesHasGun() && !unit.IsEnemy()) EquipRifle();
+        if (unit.DoesHasMelee() && !unit.IsEnemy()) EquipSword();
     }
 
     // Update is called once per frame
@@ -101,5 +105,11 @@ public class UnitAnimator : MonoBehaviour
     {
         swordTransform.gameObject.SetActive(false);
         rifleTransform.gameObject.SetActive(true);
+    }
+
+    void RemoveWeapon()
+    {
+        swordTransform.gameObject.SetActive(false);
+        rifleTransform.gameObject.SetActive(false);
     }
 }

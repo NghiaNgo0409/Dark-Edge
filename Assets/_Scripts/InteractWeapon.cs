@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractWeapon : MonoBehaviour, IInteractable
 {
@@ -59,6 +60,7 @@ public class InteractWeapon : MonoBehaviour, IInteractable
                 break;
             case WeaponType.Pill:
                 GameManager.Instance.ShowWinCanvas();
+                GameManager.Instance.SetMap(SceneManager.GetActiveScene().buildIndex);
                 break;
             default:
                 break;
