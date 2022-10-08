@@ -33,6 +33,8 @@ public class Unit : MonoBehaviour
     {
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
+        if (DoesHasGun() && !IsEnemy()) GetComponent<ShootAction>().enabled = true;
+        if (DoesHasMelee() && !IsEnemy()) GetComponent<SwordAction>().enabled = true;
 
         healthSystem.OnDead += HealthSystem_OnDead;
 
