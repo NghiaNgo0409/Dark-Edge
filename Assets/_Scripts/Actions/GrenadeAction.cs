@@ -7,6 +7,7 @@ public class GrenadeAction : BaseAction
 {
     [SerializeField] int maxThrowDistance;
     [SerializeField] Transform grenadePrefab;
+    Vector3 desiredDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,7 @@ public class GrenadeAction : BaseAction
     void Update()
     {
         if(!isActive) return;
+        transform.forward = Vector3.Lerp(transform.forward, desiredDirection, 15 * Time.deltaTime);
     }
 
     
@@ -69,6 +71,8 @@ public class GrenadeAction : BaseAction
         Transform grenadeTransform = Instantiate(grenadePrefab, unit.GetWorldPosition(), Quaternion.identity);
         GrenadeProjectile grenadeProjectile = grenadeTransform.GetComponent<GrenadeProjectile>();
         grenadeProjectile.Setup(gridPosition, OnGrenadeComplete);
+        Vector3 targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        desiredDirection = (targetPosition - transform.position).normalized;
         ActionStart(onActionComplete);
     }
 

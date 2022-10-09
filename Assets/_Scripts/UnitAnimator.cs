@@ -43,6 +43,10 @@ public class UnitAnimator : MonoBehaviour
             zombieAttackAction.OnZombieAttackStarted += ZombieAttackAction_OnZombieAttackStarted;
             zombieAttackAction.OnZombieAttackCompleted += ZombieAttackAction_OnZombieAttackCompleted;
         }
+        if(TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
+        {
+            healthSystem.OnDamage += HealthSystem_OnDamage;
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -100,7 +104,11 @@ public class UnitAnimator : MonoBehaviour
 
     }
 
-    
+    void HealthSystem_OnDamage(object sender, EventArgs e)
+    {
+        animator.SetTrigger("Hurt");
+    }
+
     void EquipSword()
     {
         swordTransform.gameObject.SetActive(true);
