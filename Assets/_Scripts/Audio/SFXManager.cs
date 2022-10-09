@@ -7,10 +7,19 @@ public class SFXManager : MonoBehaviour
 {
     [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioClip akSFX, zombieEatingSFX, meleeSFX;
+    private void OnEnable()
+    {
+        ShootAction.OnAnyShootActions += ShootAction_OnAnyShootActions;
+    }
+
+    private void OnDisable()
+    {
+        ShootAction.OnAnyShootActions -= ShootAction_OnAnyShootActions;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        ShootAction.OnAnyShootActions += ShootAction_OnAnyShootActions;
+        //ShootAction.OnAnyShootActions += ShootAction_OnAnyShootActions;
     }
 
     // Update is called once per frame

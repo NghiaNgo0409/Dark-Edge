@@ -6,11 +6,22 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] GameObject actionVirtualCamera;
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         BaseAction.OnAnyActionStarted += BaseAction_OnAnyActionStarted;
         BaseAction.OnAnyActionCompleted += BaseAction_OnAnyActionCompleted;
+    }
+
+    private void OnDisable()
+    {
+        BaseAction.OnAnyActionStarted -= BaseAction_OnAnyActionStarted;
+        BaseAction.OnAnyActionCompleted -= BaseAction_OnAnyActionCompleted;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        //BaseAction.OnAnyActionStarted += BaseAction_OnAnyActionStarted;
+        //BaseAction.OnAnyActionCompleted += BaseAction_OnAnyActionCompleted;
 
         HideActionCamera();
     }
