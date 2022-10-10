@@ -7,6 +7,7 @@ public class HealthSystem : MonoBehaviour
 {
     public event EventHandler OnDead;
     public event EventHandler OnDamage;
+    public static event EventHandler OnStaticDamage;
 
     [SerializeField] int health;
     [SerializeField] Transform ragdollRootBone;
@@ -28,8 +29,10 @@ public class HealthSystem : MonoBehaviour
         health -= amount;
 
         OnDamage?.Invoke(this, EventArgs.Empty);
-        
-        if(health <= 0)
+        OnStaticDamage?.Invoke(this, EventArgs.Empty);
+
+
+        if (health <= 0)
         {
             health = 0;
             Die();

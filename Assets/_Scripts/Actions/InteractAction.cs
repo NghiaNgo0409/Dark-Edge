@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InteractAction : BaseAction
 {
+    public static event EventHandler OnAnyInteractActions;
+
     [SerializeField] int maxInteractDistance;
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,7 @@ public class InteractAction : BaseAction
     {
         IInteractable interactableObject = LevelGrid.Instance.GetInteractableObjectAtGridPosition(gridPosition);
         interactableObject.Interact(ActionComplete);
+        OnAnyInteractActions?.Invoke(this, EventArgs.Empty);
         ActionStart(onActionComplete);
     }
 

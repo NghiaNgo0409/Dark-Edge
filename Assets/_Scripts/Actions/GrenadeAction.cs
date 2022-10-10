@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GrenadeAction : BaseAction 
 {
+    public static event EventHandler OnAnyThrowGrenadeActions;
+
     [SerializeField] int maxThrowDistance;
     [SerializeField] Transform grenadePrefab;
     Vector3 desiredDirection;
@@ -73,6 +75,7 @@ public class GrenadeAction : BaseAction
         grenadeProjectile.Setup(gridPosition, OnGrenadeComplete);
         Vector3 targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
         desiredDirection = (targetPosition - transform.position).normalized;
+        OnAnyThrowGrenadeActions?.Invoke(this, EventArgs.Empty);
         ActionStart(onActionComplete);
     }
 
