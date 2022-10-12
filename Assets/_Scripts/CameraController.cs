@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (TimelineManager.Instance.IsTimeline()) return;
         if (PauseSystemUI.Instance.GetIsPause()) return;
         if (GameManager.Instance.GetIsLose()) return;
         if (GameManager.Instance.GetIsWin()) return;

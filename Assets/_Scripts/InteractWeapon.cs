@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 public class InteractWeapon : MonoBehaviour, IInteractable
 {
     public static event EventHandler OnAnySpawnItem;
+    public static event EventHandler OnAnyEndItemCollected;
     enum WeaponType
     {
         Gun,
         Melee,
-        Pill
+        Pill,
+        EndItem,
     }
 
     GridPosition gridPosition;
@@ -61,6 +63,9 @@ public class InteractWeapon : MonoBehaviour, IInteractable
             case WeaponType.Pill:
                 GameManager.Instance.ShowWinCanvas();
                 GameManager.Instance.SetMap(SceneManager.GetActiveScene().buildIndex);
+                break;
+            case WeaponType.EndItem:
+                OnAnyEndItemCollected?.Invoke(this, EventArgs.Empty);
                 break;
             default:
                 break;

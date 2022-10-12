@@ -20,6 +20,7 @@ public class MousePosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!PauseSystemUI.Instance) return;
         if(PauseSystemUI.Instance.GetIsPause()) return;
         transform.position = MousePosition.GetPosition();
     }

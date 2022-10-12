@@ -37,6 +37,7 @@ public class UnitActionSystem : MonoBehaviour
     void Update()
     {
         if(isBusy) return;
+        if (TimelineManager.Instance.IsTimeline()) return;
         if(GameManager.Instance.GetIsWin()) return;
         if(PauseSystemUI.Instance.GetIsPause()) return;
         if(TryHandleSelectingUnit()) return;

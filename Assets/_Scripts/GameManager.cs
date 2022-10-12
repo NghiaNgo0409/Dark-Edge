@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using static Cinemachine.DocumentationSortingAttribute;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject loseCanvas;
     bool isWin;
     bool isLose;
+    bool endGame;
     void Awake() 
     {
         if(Instance == null)
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        InteractWeapon.OnAnyEndItemCollected += InteractWeapon_OnAnyEndItemCollected;
     }
 
     // Update is called once per frame
@@ -74,6 +76,16 @@ public class GameManager : MonoBehaviour
     public bool GetIsLose()
     {
         return isLose;
+    }
+
+    public bool IsEndGame()
+    {
+        return endGame;
+    }
+
+    void InteractWeapon_OnAnyEndItemCollected(object sender, EventArgs e)
+    {
+        endGame = true;
     }
 
     public void ShowWinCanvas()
