@@ -1,8 +1,10 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class TimelineManager : MonoBehaviour
 {
@@ -12,7 +14,10 @@ public class TimelineManager : MonoBehaviour
     [SerializeField] PlayableDirector endGameTimeLine;
     [SerializeField] GameObject inGameCanvas;
     [SerializeField] GameObject endGameCanvas;
+    [SerializeField] GameObject endingCanvas;
     [SerializeField] GameObject actor;
+    [SerializeField] CinemachineVirtualCamera cm1;
+    [SerializeField] CinemachineVirtualCamera cm2;
     bool isTimeline = true;
     private void Awake()
     {
@@ -37,7 +42,7 @@ public class TimelineManager : MonoBehaviour
     void Update()
     {
         timeChange -= Time.deltaTime;
-        if(timeChange <= 0)
+        if(timeChange <= 0 && !GameManager.Instance.IsEndGame())
         {
             isTimeline = false;
             timelineCanvas.SetActive(false);
@@ -48,6 +53,8 @@ public class TimelineManager : MonoBehaviour
     void InteractWeapon_OnAnyHelicopterStart(object sender, EventArgs e)
     {
         actor.SetActive(true);
+        endingCanvas.SetActive(true);
+        cm2.Priority = 100;
         UnitActionSystem.Instance.GetSelectingUnit().gameObject.SetActive(false);
         endGameTimeLine.Play();
     }
@@ -59,6 +66,7 @@ public class TimelineManager : MonoBehaviour
     }
     void EndGameDirector_Stopped(PlayableDirector obj)
     {
+        inGameCanvas.SetActive(true);
         endGameCanvas.SetActive(true);
     }
 

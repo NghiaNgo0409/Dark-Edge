@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class InteractWeapon : MonoBehaviour, IInteractable
 {
     public static event EventHandler OnAnySpawnItem;
+    public static event EventHandler OnAnyItemCollected;    
     public static event EventHandler OnAnyEndItemCollected;
     enum WeaponType
     {
@@ -41,6 +42,8 @@ public class InteractWeapon : MonoBehaviour, IInteractable
             isActive = false;
             onInteractCompleted();
             Destroy(gameObject);
+            LevelGrid.Instance.RemoveInteractableObjectAtGridPosition(gridPosition);
+            OnAnyItemCollected?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -50,7 +53,7 @@ public class InteractWeapon : MonoBehaviour, IInteractable
         isActive = true;
         timer = .2f;
         Unit selectingUnit = UnitActionSystem.Instance.GetSelectingUnit();
-        switch(weaponType)
+        switch (weaponType)
         {
             case WeaponType.Gun:
                 selectingUnit.SetGun(true);

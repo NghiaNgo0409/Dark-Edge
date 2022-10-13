@@ -56,6 +56,8 @@ public class GridSystemVisual : MonoBehaviour
         UnitActionSystem.Instance.OnSelectedActionChange += UnitActionSystem_OnSelectedActionChange; 
         LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
         InteractWeapon.OnAnySpawnItem += InteractWeapon_OnAnySpawnItem;
+        InteractWeapon.OnAnyItemCollected += InteractWeapon_OnAnyItemCollected;
+        InteractHelicopter.OnAnyHelicopterStop += InteractHelicopter_OnAnyHelicopterStop;
     }
 
     // Update is called once per frame
@@ -180,6 +182,16 @@ public class GridSystemVisual : MonoBehaviour
     }
 
     void InteractWeapon_OnAnySpawnItem(object sender, EventArgs e)
+    {
+        UpdateVisualGrid();
+    }
+    
+    void InteractWeapon_OnAnyItemCollected(object sender, EventArgs e)
+    {
+        UpdateVisualGrid();
+    }
+
+    void InteractHelicopter_OnAnyHelicopterStop(object sender, EventArgs e)
     {
         UpdateVisualGrid();
     }
