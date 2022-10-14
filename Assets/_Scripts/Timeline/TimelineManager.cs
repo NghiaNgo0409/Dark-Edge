@@ -33,7 +33,7 @@ public class TimelineManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InteractHelicopter.OnAnyHelicopterStart += InteractWeapon_OnAnyHelicopterStart;
+        actor = GameObject.Find("-------Units-------").transform.GetChild(0).gameObject;
         endGameTimeLine.played += EndGameDirector_Played;
         endGameTimeLine.stopped += EndGameDirector_Stopped;
     }
@@ -50,12 +50,22 @@ public class TimelineManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        InteractHelicopter.OnAnyHelicopterStart += InteractWeapon_OnAnyHelicopterStart;
+    }
+
+    private void OnDisable()
+    {
+        InteractHelicopter.OnAnyHelicopterStart -= InteractWeapon_OnAnyHelicopterStart;
+    }
+
     void InteractWeapon_OnAnyHelicopterStart(object sender, EventArgs e)
     {
+        UnitActionSystem.Instance.GetSelectingUnit().gameObject.SetActive(false);
         actor.SetActive(true);
         endingCanvas.SetActive(true);
         cm2.Priority = 100;
-        UnitActionSystem.Instance.GetSelectingUnit().gameObject.SetActive(false);
         endGameTimeLine.Play();
     }
 

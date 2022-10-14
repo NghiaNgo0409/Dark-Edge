@@ -26,6 +26,7 @@ public class MapManager : MonoBehaviour
         {
             if (GameManager.Instance.GetMap(i) != 0)
             {
+                if (i == 4) return;
                 int index = i - 2;
                 itemIconList[index].SetActive(true);
                 itemIconLockList[index].SetActive(false);

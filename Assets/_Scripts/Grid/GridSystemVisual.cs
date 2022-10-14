@@ -55,15 +55,25 @@ public class GridSystemVisual : MonoBehaviour
 
         UnitActionSystem.Instance.OnSelectedActionChange += UnitActionSystem_OnSelectedActionChange; 
         LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
-        InteractWeapon.OnAnySpawnItem += InteractWeapon_OnAnySpawnItem;
-        InteractWeapon.OnAnyItemCollected += InteractWeapon_OnAnyItemCollected;
-        InteractHelicopter.OnAnyHelicopterStop += InteractHelicopter_OnAnyHelicopterStop;
+        //InteractHelicopter.OnAnyHelicopterStop += InteractHelicopter_OnAnyHelicopterStop;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnEnable()
+    {
+        InteractWeapon.OnAnySpawnItem += InteractWeapon_OnAnySpawnItem;
+        InteractWeapon.OnAnyItemCollected += InteractWeapon_OnAnyItemCollected;
+    }
+
+    private void OnDisable()
+    {
+        InteractWeapon.OnAnySpawnItem -= InteractWeapon_OnAnySpawnItem;
+        InteractWeapon.OnAnyItemCollected -= InteractWeapon_OnAnyItemCollected;
     }
 
     public void HideAllGridPosition()
@@ -185,16 +195,16 @@ public class GridSystemVisual : MonoBehaviour
     {
         UpdateVisualGrid();
     }
-    
+
     void InteractWeapon_OnAnyItemCollected(object sender, EventArgs e)
     {
         UpdateVisualGrid();
     }
 
-    void InteractHelicopter_OnAnyHelicopterStop(object sender, EventArgs e)
-    {
-        UpdateVisualGrid();
-    }
+    //void InteractHelicopter_OnAnyHelicopterStop(object sender, EventArgs e)
+    //{
+    //    UpdateVisualGrid();
+    //}
 
     Material GetGridVisualTypeMaterial(GridVisualType gridVisualType)
     {

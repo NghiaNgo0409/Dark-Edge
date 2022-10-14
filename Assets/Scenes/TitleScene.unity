@@ -819,6 +819,11 @@ PrefabInstance:
       propertyPath: m_VerticalAlignment
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 800415006301320282, guid: 917eaa868afcf46fea4152e2bad07ccb,
+        type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 800415006335866251, guid: 917eaa868afcf46fea4152e2bad07ccb,
         type: 3}
       propertyPath: m_textAlignment
@@ -1009,6 +1014,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Setting
       objectReference: {fileID: 0}
+    - target: {fileID: 800415007192189307, guid: 917eaa868afcf46fea4152e2bad07ccb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 800415007357339588, guid: 917eaa868afcf46fea4152e2bad07ccb,
         type: 3}
       propertyPath: m_IsActive
@@ -1017,7 +1027,7 @@ PrefabInstance:
     - target: {fileID: 800415007367982722, guid: 917eaa868afcf46fea4152e2bad07ccb,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.358
+      value: 0.35793582
       objectReference: {fileID: 0}
     - target: {fileID: 800415007367982722, guid: 917eaa868afcf46fea4152e2bad07ccb,
         type: 3}
@@ -1078,6 +1088,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 800415007696098500, guid: 917eaa868afcf46fea4152e2bad07ccb,
+        type: 3}
+      propertyPath: m_IsOn
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 800415007884579713, guid: 917eaa868afcf46fea4152e2bad07ccb,
         type: 3}

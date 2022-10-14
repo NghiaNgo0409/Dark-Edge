@@ -6,7 +6,7 @@ using UnityEngine;
 public class InteractHelicopter : MonoBehaviour, IInteractable
 {
     public static event EventHandler OnAnyHelicopterStart;
-    public static event EventHandler OnAnyHelicopterStop;
+    //public static event EventHandler OnAnyHelicopterStop;
 
     GridPosition gridPosition;
     Action onInteractCompleted;
@@ -30,8 +30,8 @@ public class InteractHelicopter : MonoBehaviour, IInteractable
         {
             isActive = false;
             onInteractCompleted();
-            LevelGrid.Instance.RemoveInteractableObjectAtGridPosition(gridPosition);
-            OnAnyHelicopterStop?.Invoke(this, EventArgs.Empty);
+            //LevelGrid.Instance.RemoveInteractableObjectAtGridPosition(gridPosition);
+            //OnAnyHelicopterStop?.Invoke(this, EventArgs.Empty);
         }
     }
 

@@ -41,7 +41,7 @@ public class InteractWeapon : MonoBehaviour, IInteractable
         {
             isActive = false;
             onInteractCompleted();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             LevelGrid.Instance.RemoveInteractableObjectAtGridPosition(gridPosition);
             OnAnyItemCollected?.Invoke(this, EventArgs.Empty);
         }
