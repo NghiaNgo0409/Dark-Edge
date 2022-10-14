@@ -41,12 +41,12 @@ public class QualityController : MonoBehaviour
         else if(modeQuality == "Medium")
         {
             QualitySettings.SetQualityLevel(1);
-            QualitySettings.renderPipeline = qualities[0];
+            QualitySettings.renderPipeline = qualities[1];
         }
         else
         {
             QualitySettings.SetQualityLevel(2);
-            QualitySettings.renderPipeline = qualities[0];
+            QualitySettings.renderPipeline = qualities[2];
         }
     }
 }

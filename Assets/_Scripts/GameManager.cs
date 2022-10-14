@@ -39,7 +39,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Tab) && SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 
     public void LoadToScene(int index) 

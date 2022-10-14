@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            actionPoints = 100;
+            actionPoints = 5;
         }
     }
 
